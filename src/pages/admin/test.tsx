@@ -382,14 +382,13 @@ export default function AdminTestPage() {
     );
 
   return (
-    <AdminLayout title="System Tests">
+    <AdminLayout title="Kiểm tra hệ thống">
       <div className="space-y-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-2xl font-bold">CRUD Integration Test</h2>
+            <h2 className="text-2xl font-bold">Kiểm tra tích hợp CRUD</h2>
             <p className="text-muted-foreground">
-              Run a full Create, Read, Update, Delete cycle on all database
-              tables.
+              Thực thi toàn bộ chu kỳ Thêm, Xem, Sửa, Xóa trên tất cả các bảng dữ liệu.
             </p>
           </div>
           <Button
@@ -408,25 +407,24 @@ export default function AdminTestPage() {
               <FlaskConical className="mr-2 size-4" />
             )}
             {isTesting
-              ? "Stop Tests"
+              ? "Dừng kiểm tra"
               : isLoadingSettings
-                ? "Loading..."
-                : "Run All Tests"}
+                ? "Đang tải..."
+                : "Chạy tất cả kiểm tra"}
           </Button>
         </div>
         <Alert variant="destructive">
           <AlertTriangle className="h-4 w-4" />
-          <AlertTitle>Warning</AlertTitle>
+          <AlertTitle>Cảnh báo</AlertTitle>
           <AlertDescription>
-            This performs live database operations. While it cleans up after
-            itself, running this on a production database is not recommended.
+            Thao tác này thực thi trực tiếp trên cơ sở dữ liệu. Mặc dù hệ thống sẽ tự dọn dẹp sau khi chạy, bạn nên cân nhắc khi thực hiện.
           </AlertDescription>
         </Alert>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <Card>
             <CardHeader className="flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">
-                Tests Passed
+                Kiểm tra thành công
               </CardTitle>
               <CheckCircle className="size-4 text-green-500" />
             </CardHeader>
@@ -439,7 +437,7 @@ export default function AdminTestPage() {
           <Card>
             <CardHeader className="flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">
-                Tests Failed
+                Kiểm tra thất bại
               </CardTitle>
               <XCircle className="size-4 text-red-500" />
             </CardHeader>
@@ -452,7 +450,7 @@ export default function AdminTestPage() {
           <Card>
             <CardHeader className="flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">
-                Total Duration
+                Tổng thời gian thực thi
               </CardTitle>
               <Timer className="size-4 text-muted-foreground" />
             </CardHeader>
@@ -463,17 +461,17 @@ export default function AdminTestPage() {
         </div>
         <Card>
           <CardHeader>
-            <CardTitle>Test Log</CardTitle>
+            <CardTitle>Nhật ký kiểm tra</CardTitle>
           </CardHeader>
           <CardContent>
             <ScrollArea className="h-96 w-full rounded-md border">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="w-[40px]">Status</TableHead>
-                    <TableHead>Test Name</TableHead>
-                    <TableHead className="w-[100px]">Duration</TableHead>
-                    <TableHead>Message</TableHead>
+                    <TableHead className="w-[40px]">Trạng thái</TableHead>
+                    <TableHead>Tên bài kiểm tra</TableHead>
+                    <TableHead className="w-[100px]">Thời gian</TableHead>
+                    <TableHead>Thông điệp</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -512,7 +510,7 @@ export default function AdminTestPage() {
                   {logs.length === 0 && (
                     <TableRow>
                       <TableCell colSpan={4} className="h-24 text-center">
-                        Click "Run All Tests" to begin.
+                        Nhấn "Chạy tất cả kiểm tra" để bắt đầu.
                       </TableCell>
                     </TableRow>
                   )}

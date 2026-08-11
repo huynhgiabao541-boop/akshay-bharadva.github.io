@@ -67,7 +67,7 @@ const NoteCard = ({
               {note.title}
             </h3>
            ) : (
-             <span className="text-muted-foreground italic text-sm">Untitled</span>
+             <span className="text-muted-foreground italic text-sm">Chưa có tiêu đề</span>
            )}
            {note.is_pinned && (
             <Pin className="size-3.5 text-primary shrink-0 rotate-45" fill="currentColor" />
@@ -115,7 +115,7 @@ const NoteCard = ({
                 size="icon"
                 className="h-7 w-7 rounded-full hover:bg-black/5 dark:hover:bg-white/10"
                 onClick={(e) => { e.stopPropagation(); onTogglePin(); }}
-                title={note.is_pinned ? "Unpin" : "Pin"}
+                title={note.is_pinned ? "Bỏ ghim" : "Ghim"}
                 >
                 {note.is_pinned ? <PinOff className="size-3.5" /> : <Pin className="size-3.5" />}
                 </Button>
@@ -124,7 +124,7 @@ const NoteCard = ({
                 size="icon"
                 className="h-7 w-7 rounded-full hover:bg-black/5 dark:hover:bg-white/10"
                 onClick={(e) => { e.stopPropagation(); onEdit(); }}
-                title="Edit"
+                title="Chỉnh sửa"
                 >
                 <Edit className="size-3.5" />
                 </Button>
@@ -133,7 +133,7 @@ const NoteCard = ({
                 size="icon"
                 className="h-7 w-7 rounded-full hover:bg-red-500/20 hover:text-red-600"
                 onClick={(e) => { e.stopPropagation(); onDelete(); }}
-                title="Delete"
+                title="Xóa"
                 >
                 <Trash2 className="size-3.5" />
                 </Button>
@@ -230,22 +230,22 @@ export default function NotesManager() {
   return (
     <ManagerWrapper>
       <PageHeader
-        title="Notes"
-        description="Capture thoughts and ideas"
+        title="Ghi chú"
+        description="Lưu lại suy nghĩ và ý tưởng của bạn"
         actions={
           <Button onClick={handleCreateNote}>
-            <Plus className="mr-2 size-4" /> New Note
+            <Plus className="mr-2 size-4" /> Ghi chú mới
           </Button>
         }
         searchValue={searchTerm}
         onSearch={setSearchTerm}
-        searchPlaceholder="Search notes..."
+        searchPlaceholder="Tìm kiếm ghi chú..."
       />
 
       <div className="flex flex-col md:flex-row gap-6 items-start">
         {/* Desktop Sidebar Tags */}
         <aside className="w-48 hidden md:block sticky top-20 shrink-0">
-          <h4 className="font-semibold text-sm mb-3 px-2 text-muted-foreground">Labels</h4>
+          <h4 className="font-semibold text-sm mb-3 px-2 text-muted-foreground">Nhãn / Thẻ</h4>
           <div className="flex flex-col gap-1">
             <Button
               variant={!selectedTag ? "secondary" : "ghost"}
@@ -254,7 +254,7 @@ export default function NotesManager() {
               size="sm"
             >
               <StickyNote className="mr-2 size-3.5" />
-              All Notes
+              Tất cả ghi chú
             </Button>
             {uniqueTags.map((tag) => (
               <Button
@@ -283,7 +283,7 @@ export default function NotesManager() {
                   onClick={() => setSelectedTag(null)}
                   className="rounded-full h-7 text-xs"
                 >
-                  All
+                  Tất cả
                 </Button>
                 {uniqueTags.map((tag) => (
                   <Button
@@ -306,9 +306,9 @@ export default function NotesManager() {
           {!isLoading && filteredNotes.length === 0 ? (
             <div className="py-20 text-center text-muted-foreground border-2 border-dashed rounded-lg bg-muted/10">
               <StickyNote className="mx-auto size-12 opacity-20" />
-              <h3 className="mt-4 text-lg font-semibold">No Notes Found</h3>
+              <h3 className="mt-4 text-lg font-semibold">Không tìm thấy ghi chú nào</h3>
               <p className="mt-1 text-sm text-muted-foreground/80">
-                {searchTerm ? "Try a different search." : "Create your first note to get started!"}
+                {searchTerm ? "Thử tìm kiếm với từ khóa khác." : "Tạo ghi chú đầu tiên của bạn để bắt đầu!"}
               </p>
             </div>
           ) : (

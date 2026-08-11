@@ -43,10 +43,10 @@ export default function HabitStats({ habits }: { habits: Habit[] }) {
             <div className="flex justify-between items-end">
               <div>
                 <h3 className="font-bold text-sm sm:text-lg truncate">
-                  Consistency Level
+                  Cấp độ kiên trì
                 </h3>
                 <p className="text-xs text-muted-foreground hidden sm:block">
-                  Keep tracking to level up!
+                  Duy trì điểm danh hàng ngày để thăng cấp!
                 </p>
               </div>
               <span className="font-mono text-xs font-medium text-primary whitespace-nowrap ml-2">
@@ -64,7 +64,7 @@ export default function HabitStats({ habits }: { habits: Habit[] }) {
           <div className="flex items-center gap-2 sm:justify-between w-full">
             <span className="text-xs sm:text-sm text-muted-foreground flex items-center gap-1.5">
               <Target className="size-3.5 sm:size-4" />
-              <span className="hidden sm:inline">Active</span> Habits
+              Thói quen đang theo dõi
             </span>
             <span className="font-bold text-base sm:text-lg">
               {stats.totalHabits}
@@ -77,7 +77,7 @@ export default function HabitStats({ habits }: { habits: Habit[] }) {
           <div className="flex items-center gap-2 sm:justify-between w-full">
             <span className="text-xs sm:text-sm text-muted-foreground flex items-center gap-1.5">
               <Zap className="size-3.5 sm:size-4" />
-              <span className="hidden sm:inline">Total</span> Check-ins
+              Tổng lượt hoàn thành
             </span>
             <span className="font-bold text-base sm:text-lg">
               {stats.totalLogs}

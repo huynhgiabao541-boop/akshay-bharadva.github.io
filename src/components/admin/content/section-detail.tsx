@@ -116,13 +116,13 @@ export default function SectionDetail({
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem onClick={() => onEditSection(section)}>
-                    <Edit className="mr-2 size-4" /> Edit Details
+                    <Edit className="mr-2 size-4" /> Sửa chi tiết
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     className="text-destructive"
                     onClick={() => onDeleteSection(section.id)}
                   >
-                    <Trash2 className="mr-2 size-4" /> Delete Section
+                    <Trash2 className="mr-2 size-4" /> Xóa mục này
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -133,7 +133,7 @@ export default function SectionDetail({
                   size="sm"
                   onClick={() => onEditSection(section)}
                 >
-                  <Edit className="mr-2 size-4" /> Edit
+                  <Edit className="mr-2 size-4" /> Chỉnh sửa
                 </Button>
                 <Button
                   variant="ghost"
@@ -153,16 +153,16 @@ export default function SectionDetail({
           {section.type === "markdown" && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <Label className="text-base">Content</Label>
+                <Label className="text-base">Nội dung (Markdown)</Label>
                 <span className="text-xs text-muted-foreground">
-                  Auto-saving
+                  Tự động lưu
                 </span>
               </div>
               <div className="rounded-lg min-h-[500px] w-full max-w-full overflow-hidden">
                 <NovelEditor
                   value={content}
                   onChange={setContent}
-                  placeholder="Write your section content here..."
+                  placeholder="Nhập nội dung văn bản tại đây..."
                   minHeight="500px"
                   className="prose-sm sm:prose max-w-none"
                 />
@@ -174,15 +174,15 @@ export default function SectionDetail({
             <div className="space-y-4">
               <div className="flex items-center justify-between sticky top-0 bg-background/95 py-2 z-10 backdrop-blur-sm">
                 <h3 className="text-lg font-semibold flex items-center gap-2">
-                  Items{" "}
+                  Danh sách mục con{" "}
                   <span className="bg-secondary text-xs px-2 py-0.5 rounded-full text-muted-foreground">
                     {section.portfolio_items?.length || 0}
                   </span>
                 </h3>
                 <Button size="sm" onClick={() => onNewItem(section.id)}>
                   <Plus className="mr-2 size-4" />{" "}
-                  <span className="hidden xs:inline">Add Item</span>
-                  <span className="xs:hidden">Add</span>
+                  <span className="hidden xs:inline">Thêm mục mới</span>
+                  <span className="xs:hidden">Thêm</span>
                 </Button>
               </div>
               <div className="grid gap-3">
@@ -228,13 +228,13 @@ export default function SectionDetail({
                                 <DropdownMenuItem
                                   onClick={() => onEditItem(item)}
                                 >
-                                  Edit
+                                  Sửa
                                 </DropdownMenuItem>
                                 <DropdownMenuItem
                                   className="text-destructive"
                                   onClick={() => onDeleteItem(item.id)}
                                 >
-                                  Delete
+                                  Xóa
                                 </DropdownMenuItem>
                               </DropdownMenuContent>
                             </DropdownMenu>
@@ -247,7 +247,7 @@ export default function SectionDetail({
                               <Calendar className="size-3" />
                               <span>
                                 {item.date_from || "?"} -{" "}
-                                {item.date_to || "Present"}
+                                {item.date_to || "Hiện tại"}
                               </span>
                             </div>
                           )}
@@ -258,7 +258,7 @@ export default function SectionDetail({
                               rel="noreferrer"
                               className="flex items-center gap-1 hover:text-primary transition-colors"
                             >
-                              <LinkIcon className="size-3" /> Link
+                              <LinkIcon className="size-3" /> Liên kết
                             </a>
                           )}
                         </div>
@@ -290,7 +290,7 @@ export default function SectionDetail({
                             size="icon"
                             className="h-8 w-8"
                             onClick={() => onEditItem(item)}
-                            title="Edit"
+                            title="Sửa"
                           >
                             <Edit className="size-4" />
                           </Button>
@@ -299,7 +299,7 @@ export default function SectionDetail({
                             size="icon"
                             className="h-8 w-8 hover:text-destructive"
                             onClick={() => onDeleteItem(item.id)}
-                            title="Delete"
+                            title="Xóa"
                           >
                             <Trash2 className="size-4" />
                           </Button>
@@ -311,7 +311,7 @@ export default function SectionDetail({
                 {(!section.portfolio_items ||
                   section.portfolio_items.length === 0) && (
                   <div className="text-center py-10 border-2 border-dashed rounded-lg bg-muted/10 text-muted-foreground">
-                    No items yet. Click "Add Item" to create one.
+                    Chưa có mục con nào. Nhấn "Thêm mục mới" để tạo.
                   </div>
                 )}
               </div>

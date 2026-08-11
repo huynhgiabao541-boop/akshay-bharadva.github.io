@@ -149,8 +149,8 @@ export default function SiteSettingsManager() {
   return (
     <ManagerWrapper className="pb-24">
       <PageHeader
-        title="Site Settings"
-        description="Manage global settings for your portfolio's identity and layout."
+        title="Cài đặt trang web"
+        description="Quản lý cài đặt tổng thể cho nhận diện thương hiệu và bố cục trang web portfolio."
         actions={
           <Button
             onClick={form.handleSubmit(onSubmit)}
@@ -158,7 +158,7 @@ export default function SiteSettingsManager() {
             className="w-full sm:w-auto shadow-md"
           >
             {isSubmitting && <Loader2 className="mr-2 size-4 animate-spin" />}{" "}
-            Save Changes
+            Lưu thay đổi
           </Button>
         }
       />
@@ -200,7 +200,7 @@ export default function SiteSettingsManager() {
           >
             <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
               <p className="text-sm text-muted-foreground">
-                You have unsaved changes
+                Bạn có những thay đổi chưa lưu
               </p>
               <div className="flex items-center gap-3">
                 <Button
@@ -209,7 +209,7 @@ export default function SiteSettingsManager() {
                   onClick={() => form.reset()}
                   disabled={isSubmitting}
                 >
-                  Discard
+                  Hủy thay đổi
                 </Button>
                 <Button
                   size="sm"
@@ -221,7 +221,7 @@ export default function SiteSettingsManager() {
                   ) : (
                     <Save className="mr-2 size-4" />
                   )}
-                  Save Changes
+                  Lưu thay đổi
                 </Button>
               </div>
             </div>

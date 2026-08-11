@@ -306,22 +306,22 @@ export default function FinanceManager() {
     <ManagerWrapper className="pb-20 md:pb-4">
       <PageHeader
         sticky
-        title="Finance"
+        title="Quản lý tài chính"
         description={
           date?.from
             ? date.to
-              ? `${format(date.from, "MMM d")} - ${format(date.to, "MMM d, yyyy")}`
-              : format(date.from, "MMMM d, yyyy")
-            : "Select a date range"
+              ? `${format(date.from, "dd/MM")} - ${format(date.to, "dd/MM/yyyy")}`
+              : format(date.from, "dd/MM/yyyy")
+            : "Chọn khoảng thời gian"
         }
         searchValue={searchTerm}
         onSearch={setSearchTerm}
-        searchPlaceholder="Filter..."
+        searchPlaceholder="Tìm kiếm..."
         filters={
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="outline" size="sm" className="h-9">
-                <CalendarIcon className="mr-2 size-4" /> Date
+                <CalendarIcon className="mr-2 size-4" /> Thời gian
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="end">
@@ -341,20 +341,20 @@ export default function FinanceManager() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button size="sm" className="h-9">
-                  <Plus className="mr-2 size-4" /> Add New
+                  <Plus className="mr-2 size-4" /> Thêm mới
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem
                   onSelect={() => handleOpenSheet("transaction")}
                 >
-                  <ArrowRightLeft className="mr-2 size-4" /> Transaction
+                  <ArrowRightLeft className="mr-2 size-4" /> Giao dịch
                 </DropdownMenuItem>
                 <DropdownMenuItem onSelect={() => handleOpenSheet("recurring")}>
-                  <Repeat className="mr-2 size-4" /> Recurring Rule
+                  <Repeat className="mr-2 size-4" /> Quy tắc định kỳ
                 </DropdownMenuItem>
                 <DropdownMenuItem onSelect={() => handleOpenSheet("goal")}>
-                  <Target className="mr-2 size-4" /> Goal
+                  <Target className="mr-2 size-4" /> Mục tiêu tài chính
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -369,11 +369,11 @@ export default function FinanceManager() {
       >
         <div className="hidden md:block">
           <TabsList className="grid w-full grid-cols-5 lg:w-auto lg:inline-grid">
-            <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-            <TabsTrigger value="transactions">Transactions</TabsTrigger>
-            <TabsTrigger value="recurring">Recurring</TabsTrigger>
-            <TabsTrigger value="goals">Goals</TabsTrigger>
-            <TabsTrigger value="analytics">Analytics</TabsTrigger>
+            <TabsTrigger value="dashboard">Tổng quan</TabsTrigger>
+            <TabsTrigger value="transactions">Giao dịch</TabsTrigger>
+            <TabsTrigger value="recurring">Định kỳ</TabsTrigger>
+            <TabsTrigger value="goals">Mục tiêu</TabsTrigger>
+            <TabsTrigger value="analytics">Phân tích</TabsTrigger>
           </TabsList>
         </div>
 
@@ -549,13 +549,13 @@ function MobileBottomNav({
     <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-background/95 backdrop-blur border-t grid grid-cols-5 items-center px-1 z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
       <BottomNavButton
         icon={Home}
-        label="Home"
+        label="Trang chủ"
         isActive={activeTab === "dashboard"}
         onClick={() => onTabChange("dashboard")}
       />
       <BottomNavButton
         icon={ArrowRightLeft}
-        label="Trans."
+        label="Giao dịch"
         isActive={activeTab === "transactions"}
         onClick={() => onTabChange("transactions")}
       />
@@ -569,13 +569,13 @@ function MobileBottomNav({
       </div>
       <BottomNavButton
         icon={Repeat}
-        label="Recurring"
+        label="Định kỳ"
         isActive={activeTab === "recurring"}
         onClick={() => onTabChange("recurring")}
       />
       <BottomNavButton
         icon={Menu}
-        label="More"
+        label="Thêm"
         isActive={activeTab === "goals" || activeTab === "analytics"}
         onClick={onMore}
       />
@@ -596,7 +596,7 @@ function AddNewDrawer({
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>Add New</DrawerTitle>
+          <DrawerTitle>Thêm mới</DrawerTitle>
         </DrawerHeader>
         <div className="p-4 pb-8 space-y-2">
           <Button
@@ -604,21 +604,21 @@ function AddNewDrawer({
             className="w-full justify-start h-12 text-base"
             onClick={() => onSelect("transaction")}
           >
-            <ArrowRightLeft className="mr-3 size-5 text-primary" /> Transaction
+            <ArrowRightLeft className="mr-3 size-5 text-primary" /> Giao dịch
           </Button>
           <Button
             variant="outline"
             className="w-full justify-start h-12 text-base"
             onClick={() => onSelect("recurring")}
           >
-            <Repeat className="mr-3 size-5 text-blue-500" /> Recurring Rule
+            <Repeat className="mr-3 size-5 text-blue-500" /> Quy tắc định kỳ
           </Button>
           <Button
             variant="outline"
             className="w-full justify-start h-12 text-base"
             onClick={() => onSelect("goal")}
           >
-            <Target className="mr-3 size-5 text-orange-500" /> Goal
+            <Target className="mr-3 size-5 text-orange-500" /> Mục tiêu tài chính
           </Button>
         </div>
       </DrawerContent>
@@ -641,7 +641,7 @@ function MoreDrawer({
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent>
         <DrawerHeader>
-          <DrawerTitle>More</DrawerTitle>
+          <DrawerTitle>Tùy chọn khác</DrawerTitle>
         </DrawerHeader>
         <div className="p-4 pb-8 space-y-2">
           <Button
@@ -649,14 +649,14 @@ function MoreDrawer({
             className="w-full justify-start h-12"
             onClick={() => onTabChange("goals")}
           >
-            <Target className="mr-3 size-5" /> Goals
+            <Target className="mr-3 size-5" /> Mục tiêu
           </Button>
           <Button
             variant={activeTab === "analytics" ? "secondary" : "ghost"}
             className="w-full justify-start h-12"
             onClick={() => onTabChange("analytics")}
           >
-            <LayoutDashboard className="mr-3 size-5" /> Analytics
+            <LayoutDashboard className="mr-3 size-5" /> Phân tích
           </Button>
         </div>
       </DrawerContent>

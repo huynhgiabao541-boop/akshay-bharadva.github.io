@@ -79,15 +79,15 @@ export default function AdminHabitsPage() {
     );
 
   return (
-    <AdminLayout title="Habit Tracker">
+    <AdminLayout title="Theo dõi thói quen">
       <div className="space-y-4 sm:space-y-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h2 className="text-xl sm:text-2xl font-bold flex items-center gap-2">
-              Habit Tracker
+              Theo dõi thói quen
             </h2>
             <p className="text-muted-foreground text-sm hidden sm:block">
-              Level up your life, one day at a time.
+              Xây dựng nếp sống lành mạnh và phát triển bản thân từng ngày.
             </p>
           </div>
           <div className="flex justify-center sm:my-0">
@@ -98,7 +98,7 @@ export default function AdminHabitsPage() {
             size="sm"
             className="w-full sm:w-auto shadow-lg shadow-primary/20"
           >
-            <Plus className="mr-2 size-4" /> New Habit
+            <Plus className="mr-2 size-4" /> Thói quen mới
           </Button>
         </div>
 
@@ -124,7 +124,7 @@ export default function AdminHabitsPage() {
             <div className="flex justify-between items-center">
               <SheetHeader>
                 <SheetTitle>
-                  {editingHabit ? "Edit Habit" : "Create New Habit"}
+                  {editingHabit ? "Chỉnh sửa thói quen" : "Tạo thói quen mới"}
                 </SheetTitle>
               </SheetHeader>
               <SheetClose asChild>

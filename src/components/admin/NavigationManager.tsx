@@ -61,7 +61,7 @@ const LinkForm = ({
   return (
     <form onSubmit={handleSubmit} className="space-y-4 pt-6">
       <div className="space-y-1">
-        <Label htmlFor="label">Label</Label>
+        <Label htmlFor="label">Tên hiển thị (Label)</Label>
         <Input
           id="label"
           value={formData.label}
@@ -73,7 +73,7 @@ const LinkForm = ({
         />
       </div>
       <div className="space-y-1">
-        <Label htmlFor="href">Path (e.g., /about)</Label>
+        <Label htmlFor="href">Đường dẫn (Ví dụ: /about)</Label>
         <Input
           id="href"
           value={formData.href}
@@ -83,9 +83,9 @@ const LinkForm = ({
       </div>
       <div className="flex justify-end gap-2 pt-4">
         <Button type="button" variant="ghost" onClick={onCancel}>
-          Cancel
+          Hủy
         </Button>
-        <Button type="submit">Save Link</Button>
+        <Button type="submit">Lưu liên kết</Button>
       </div>
     </form>
   );
@@ -112,29 +112,29 @@ export default function NavigationManager() {
   const handleSave = async (data: Partial<NavLink>) => {
     try {
       await saveNavLink(data).unwrap();
-      toast.success("Navigation link saved.");
+      toast.success("Đã lưu liên kết điều hướng.");
       setIsSheetOpen(false);
     } catch (err) {
-      toast.error("Failed to save link", { description: getErrorMessage(err) });
+      toast.error("Không thể lưu liên kết", { description: getErrorMessage(err) });
     }
   };
 
   const handleDelete = async (id: string) => {
     const isConfirmed = await confirm({
-      title: "Delete Navigation Link?",
+      title: "Xóa liên kết điều hướng?",
       description:
-        "This will remove the link from your site's public navigation bar.",
+        "Thao tác này sẽ xóa liên kết khỏi thanh menu chính trên trang web của bạn.",
       variant: "destructive",
-      confirmText: "Delete",
+      confirmText: "Xóa",
     });
 
     if (!isConfirmed) return;
     try {
       await deleteNavLink(id).unwrap();
-      toast.success("Navigation link deleted.");
+      toast.success("Đã xóa liên kết.");
       if (editingLink?.id === id) setIsSheetOpen(false);
     } catch (err) {
-      toast.error("Failed to delete link", { description: getErrorMessage(err) });
+      toast.error("Không thể xóa liên kết", { description: getErrorMessage(err) });
     }
   };
 
@@ -147,14 +147,14 @@ export default function NavigationManager() {
     try {
       await saveNavLink({ id: link.id, is_visible: !link.is_visible }).unwrap();
       toast.success(
-        `"${link.label}" is now ${!link.is_visible ? "visible" : "hidden"}.`,
+        `"${link.label}" hiện đang ${!link.is_visible ? "hiển thị" : "ẩn"}.`,
       );
     } catch (err) {
       // Revert if failed
       if (editingLink?.id === link.id) {
         setEditingLink({ ...editingLink, is_visible: link.is_visible });
       }
-      toast.error("Failed to update visibility", { description: getErrorMessage(err) });
+      toast.error("Không thể cập nhật trạng thái ẩn/hiện", { description: getErrorMessage(err) });
     }
   };
 
@@ -191,9 +191,9 @@ export default function NavigationManager() {
         saveNavLink({ id: link.id, display_order: index }),
       );
       await Promise.all(updatePromises);
-      toast.success("Navigation order saved.");
+      toast.success("Đã lưu thứ tự menu.");
     } catch {
-      toast.error("Failed to save new order.");
+      toast.error("Không thể lưu thứ tự mới.");
       setLocalLinks(links);
     }
   };
@@ -201,8 +201,8 @@ export default function NavigationManager() {
   return (
     <ManagerWrapper>
       <PageHeader
-        title="Navigation"
-        description="Manage and reorder the main navigation links for your site."
+        title="Điều hướng trang web"
+        description="Quản lý và sắp xếp thứ tự các liên kết trên thanh menu chính."
         actions={
           <Button
             onClick={() => {
@@ -211,18 +211,18 @@ export default function NavigationManager() {
             }}
             className="w-full sm:w-auto"
           >
-            <Plus className="mr-2 size-4" /> Add Link
+            <Plus className="mr-2 size-4" /> Thêm liên kết
           </Button>
         }
       />
 
       <Card>
         <CardHeader>
-          <CardTitle>Menu Items</CardTitle>
+          <CardTitle>Danh sách liên kết menu</CardTitle>
           <CardDescription>
             {isMobile
-              ? "Manage your menu links."
-              : "Drag and drop to reorder links."}
+              ? "Quản lý các liên kết menu của bạn."
+              : "Kéo thả để sắp xếp lại thứ tự hiển thị các liên kết."}
           </CardDescription>
         </CardHeader>
         <CardContent className="p-4">
@@ -270,7 +270,7 @@ export default function NavigationManager() {
                       <Switch
                         checked={link.is_visible}
                         onCheckedChange={() => handleToggleVisibility(link)}
-                        aria-label="Toggle visibility"
+                        aria-label="Ẩn/hiện liên kết"
                       />
                     )}
 
@@ -298,7 +298,7 @@ export default function NavigationManager() {
               ))}
               {localLinks.length === 0 && (
                 <div className="text-center py-8 text-muted-foreground">
-                  No links found. Add one to get started.
+                  Chưa có liên kết nào. Hãy thêm một liên kết để bắt đầu.
                 </div>
               )}
             </div>
@@ -311,10 +311,10 @@ export default function NavigationManager() {
           <div className="flex justify-between items-center">
             <SheetHeader>
               <SheetTitle>
-                {editingLink ? "Edit" : "Add"} Navigation Link
+                {editingLink ? "Chỉnh sửa" : "Thêm mới"} liên kết điều hướng
               </SheetTitle>
               <SheetDescription>
-                This link will appear in your site's main navigation bar.
+                Liên kết này sẽ xuất hiện trên thanh menu chính của trang web.
               </SheetDescription>
             </SheetHeader>
             <SheetClose asChild>
@@ -328,8 +328,8 @@ export default function NavigationManager() {
           {isMobile && editingLink && (
             <div className="flex items-center justify-between border rounded-md p-3 my-4 bg-muted/20">
               <div className="space-y-0.5">
-                <Label>Visible</Label>
-                <p className="text-xs text-muted-foreground">Show in menu</p>
+                <Label>Hiển thị</Label>
+                <p className="text-xs text-muted-foreground">Bật để hiển thị trên menu</p>
               </div>
               <Switch
                 checked={editingLink.is_visible}

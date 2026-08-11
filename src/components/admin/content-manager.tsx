@@ -212,11 +212,11 @@ export default function ContentManager() {
   return (
     <ManagerWrapper>
       <PageHeader
-        title="Content"
-        description="Manage your portfolio sections and page content"
+        title="Nội dung (CMS)"
+        description="Quản lý các mục và nội dung trang web portfolio của bạn"
         actions={
           <Button onClick={() => setSheetState({ type: "new-section" })}>
-            <Plus className="mr-2 size-4" /> New Section
+            <Plus className="mr-2 size-4" /> Mục mới
           </Button>
         }
       />
@@ -262,8 +262,8 @@ export default function ContentManager() {
             <Card className="border-dashed h-full flex items-center justify-center">
               <CardContent className="py-16 text-center">
                 <LayoutTemplate className="size-12 mx-auto text-muted-foreground/30 mb-4" />
-                <p className="text-lg font-semibold mb-1">No section selected</p>
-                <p className="text-sm text-muted-foreground">Select a section to begin editing.</p>
+                <p className="text-lg font-semibold mb-1">Chưa chọn mục nào</p>
+                <p className="text-sm text-muted-foreground">Chọn một mục từ danh sách bên trái để bắt đầu chỉnh sửa.</p>
               </CardContent>
             </Card>
           )}

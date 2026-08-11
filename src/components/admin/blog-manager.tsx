@@ -169,14 +169,14 @@ export default function BlogManager({
   return (
     <ManagerWrapper className="h-full flex flex-col">
       <PageHeader
-        title="Blog Manager"
-        description="Manage, create, and publish your content."
+        title="Quản lý bài viết (Blog)"
+        description="Quản lý, tạo mới và xuất bản các bài viết của bạn."
         searchValue={searchTerm}
         onSearch={setSearchTerm}
-        searchPlaceholder="Search posts..."
+        searchPlaceholder="Tìm kiếm bài viết..."
         actions={
           <Button onClick={handleCreatePost} size="sm" className="h-9 w-full sm:w-auto">
-            <Plus className="mr-2 size-4" /> Create Post
+            <Plus className="mr-2 size-4" /> Tạo bài viết mới
           </Button>
         }
         filters={
@@ -188,9 +188,9 @@ export default function BlogManager({
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Status</SelectItem>
-              <SelectItem value="published">Published</SelectItem>
-              <SelectItem value="draft">Drafts</SelectItem>
+              <SelectItem value="all">Tất cả trạng thái</SelectItem>
+              <SelectItem value="published">Đã xuất bản</SelectItem>
+              <SelectItem value="draft">Bản nháp</SelectItem>
             </SelectContent>
           </Select>
         }
@@ -206,9 +206,9 @@ export default function BlogManager({
           ) : filteredPosts.length === 0 ? (
             <EmptyState
               icon={FileText}
-              title="No posts found"
-              description={searchTerm ? "Try adjusting your search or filters." : "Create your first blog post to get started."}
-              action={!searchTerm ? { label: "Create Post", onClick: handleCreatePost, icon: Plus } : undefined}
+              title="Không tìm thấy bài viết nào"
+              description={searchTerm ? "Thử thay đổi từ khóa tìm kiếm hoặc bộ lọc." : "Tạo bài viết đầu tiên của bạn để bắt đầu."}
+              action={!searchTerm ? { label: "Tạo bài viết mới", onClick: handleCreatePost, icon: Plus } : undefined}
               className="h-64 border-2 border-dashed rounded-lg bg-muted/10 mx-0 sm:mx-4 my-4"
             />
           ) : (
@@ -218,12 +218,12 @@ export default function BlogManager({
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className="w-[60px]">Image</TableHead>
-                      <TableHead>Title</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Views</TableHead>
-                      <TableHead>Date</TableHead>
-                      <TableHead className="text-right">Actions</TableHead>
+                      <TableHead className="w-[60px]">Hình ảnh</TableHead>
+                      <TableHead>Tiêu đề</TableHead>
+                      <TableHead>Trạng thái</TableHead>
+                      <TableHead>Lượt xem</TableHead>
+                      <TableHead>Ngày cập nhật</TableHead>
+                      <TableHead className="text-right">Hành động</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -270,7 +270,7 @@ export default function BlogManager({
                                   : ""
                               }
                             >
-                              {post.published ? "Published" : "Draft"}
+                              {post.published ? "Đã xuất bản" : "Bản nháp"}
                             </Badge>
                           </TableCell>
                           <TableCell className="font-mono text-sm">
@@ -281,7 +281,7 @@ export default function BlogManager({
                               <Calendar className="h-3 w-3" />
                               {format(
                                 new Date(post.updated_at || new Date()),
-                                "MMM dd, yyyy",
+                                "dd/MM/yyyy",
                               )}
                             </div>
                           </TableCell>
@@ -294,7 +294,7 @@ export default function BlogManager({
                                 onClick={() => handleEditPost(post)}
                               >
                                 <Edit className="h-4 w-4" />
-                                <span className="sr-only">Edit</span>
+                                <span className="sr-only">Chỉnh sửa</span>
                               </Button>
 
                               <DropdownMenu>
@@ -309,11 +309,11 @@ export default function BlogManager({
                                   </Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="end">
-                                  <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                                  <DropdownMenuLabel>Hành động</DropdownMenuLabel>
                                   <DropdownMenuItem
                                     onClick={() => handleEditPost(post)}
                                   >
-                                    <Edit className="mr-2 h-4 w-4" /> Edit
+                                    <Edit className="mr-2 h-4 w-4" /> Chỉnh sửa
                                   </DropdownMenuItem>
                                   <DropdownMenuItem
                                     onClick={() => togglePostStatus(post)}
@@ -321,11 +321,11 @@ export default function BlogManager({
                                     {post.published ? (
                                       <>
                                         <FileText className="mr-2 h-4 w-4" />{" "}
-                                        Unpublish
+                                        Hủy xuất bản
                                       </>
                                     ) : (
                                       <>
-                                        <Eye className="mr-2 h-4 w-4" /> Publish
+                                        <Eye className="mr-2 h-4 w-4" /> Xuất bản
                                       </>
                                     )}
                                   </DropdownMenuItem>
@@ -337,7 +337,7 @@ export default function BlogManager({
                                         rel="noopener noreferrer"
                                       >
                                         <ExternalLink className="mr-2 h-4 w-4" />{" "}
-                                        View Live
+                                        Xem bài viết
                                       </a>
                                     </DropdownMenuItem>
                                   )}
@@ -346,7 +346,7 @@ export default function BlogManager({
                                     className="text-destructive focus:text-destructive"
                                     onClick={() => handleDeletePost(post)}
                                   >
-                                    <Trash2 className="mr-2 h-4 w-4" /> Delete
+                                    <Trash2 className="mr-2 h-4 w-4" /> Xóa bài
                                   </DropdownMenuItem>
                                 </DropdownMenuContent>
                               </DropdownMenu>
@@ -403,18 +403,18 @@ export default function BlogManager({
                                     <DropdownMenuItem
                                       onClick={() => handleEditPost(post)}
                                     >
-                                      Edit
+                                      Chỉnh sửa
                                     </DropdownMenuItem>
                                     <DropdownMenuItem
                                       onClick={() => togglePostStatus(post)}
                                     >
-                                      {post.published ? "Unpublish" : "Publish"}
+                                      {post.published ? "Hủy xuất bản" : "Xuất bản"}
                                     </DropdownMenuItem>
                                     <DropdownMenuItem
                                       className="text-destructive"
                                       onClick={() => handleDeletePost(post)}
                                     >
-                                      Delete
+                                      Xóa bài
                                     </DropdownMenuItem>
                                   </DropdownMenuContent>
                                 </DropdownMenu>
@@ -432,7 +432,7 @@ export default function BlogManager({
                                       : "",
                                   )}
                                 >
-                                  {post.published ? "Published" : "Draft"}
+                                  {post.published ? "Đã xuất bản" : "Bản nháp"}
                                 </Badge>
                                 <span className="text-xs text-muted-foreground font-mono">
                                   /{post.slug}

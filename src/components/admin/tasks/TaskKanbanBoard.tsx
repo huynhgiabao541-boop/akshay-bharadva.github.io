@@ -42,21 +42,21 @@ type Column = {
 const COLUMNS: Column[] = [
   {
     id: "todo",
-    label: "To Do",
+    label: "Cần làm",
     icon: Circle,
     color:
       "bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800",
   },
   {
     id: "inprogress",
-    label: "In Progress",
+    label: "Đang làm",
     icon: Clock,
     color:
       "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-900",
   },
   {
     id: "done",
-    label: "Done",
+    label: "Hoàn thành",
     icon: CheckSquare,
     color:
       "bg-green-500/10 text-green-600 dark:text-green-400 border-green-200 dark:border-green-900",
@@ -188,7 +188,7 @@ export function TaskKanbanBoard({
                 ))}
                 {colTasks.length === 0 && (
                   <div className="flex items-center justify-center flex-1 min-h-24 rounded-lg border-2 border-dashed border-muted-foreground/10 text-muted-foreground/50 transition-all text-sm font-medium">
-                    Drop tasks here
+                    Kéo thả nhiệm vụ vào đây
                   </div>
                 )}
               </div>
@@ -273,18 +273,17 @@ function KanbanCard({
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem onClick={onFocus}>
-                    <Zap className="mr-2 size-3.5 text-yellow-500" /> Start
-                    Focus
+                    <Zap className="mr-2 size-3.5 text-yellow-500" /> Tập trung ngay
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={onEdit}>
-                    <Edit className="mr-2 size-3.5" /> Edit
+                    <Edit className="mr-2 size-3.5" /> Chỉnh sửa
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     className="text-destructive focus:text-destructive"
                     onClick={onDelete}
                   >
-                    <Trash2 className="mr-2 size-3.5" /> Delete
+                    <Trash2 className="mr-2 size-3.5" /> Xóa
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

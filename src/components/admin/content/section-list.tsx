@@ -31,7 +31,7 @@ export default function SectionList({
       {!isMobile && (
         <div className="p-3 border-b bg-background/50 backdrop-blur-sm shrink-0">
           <Button onClick={onNewSection} className="w-full h-9 shadow-sm" variant="outline">
-            <Plus className="mr-2 size-4" /> New Section
+            <Plus className="mr-2 size-4" /> Mục mới
           </Button>
         </div>
       )}
@@ -44,7 +44,7 @@ export default function SectionList({
         ) : Object.keys(groupedSections).length === 0 ? (
           <div className="flex flex-col items-center justify-center p-8 text-center h-40">
             <LayoutTemplate className="size-10 text-muted-foreground/30 mb-3" />
-            <p className="text-sm text-muted-foreground">No sections yet</p>
+            <p className="text-sm text-muted-foreground">Chưa có mục nào</p>
           </div>
         ) : (
           <Accordion
@@ -61,7 +61,7 @@ export default function SectionList({
                 <AccordionTrigger className="py-3 px-3 text-sm font-semibold hover:no-underline hover:bg-muted/50 transition-colors">
                   <span className="flex items-center gap-2 truncate">
                     <LayoutTemplate className="size-4 text-muted-foreground shrink-0" />
-                    <span className="truncate">{path === "/" ? "Home Page" : path}</span>
+                    <span className="truncate">{path === "/" ? "Trang chủ (/)" : path}</span>
                   </span>
                 </AccordionTrigger>
                 <AccordionContent className="pb-2 pt-0 px-2">

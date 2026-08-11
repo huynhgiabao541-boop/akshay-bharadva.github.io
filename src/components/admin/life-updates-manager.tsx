@@ -92,10 +92,10 @@ function StatsRow({ updates }: { updates: LifeUpdate[] }) {
   const pinned = updates.filter((u) => u.is_pinned).length;
 
   const stats = [
-    { label: "Published", value: published, accent: "text-primary" },
-    { label: "Drafts", value: drafts, accent: "text-muted-foreground" },
-    { label: "Pinned", value: pinned, accent: "text-amber-500" },
-    { label: "Total", value: updates.length, accent: "text-foreground" },
+    { label: "Đã xuất bản", value: published, accent: "text-primary" },
+    { label: "Bản nháp", value: drafts, accent: "text-muted-foreground" },
+    { label: "Đã ghim", value: pinned, accent: "text-amber-500" },
+    { label: "Tổng số", value: updates.length, accent: "text-foreground" },
   ];
 
   return (
@@ -136,35 +136,35 @@ function UpdateActions({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+        <DropdownMenuLabel>Hành động</DropdownMenuLabel>
         <DropdownMenuItem onSelect={onEdit}>
-          <Edit className="mr-2 size-4" /> Edit
+          <Edit className="mr-2 size-4" /> Chỉnh sửa
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={onTogglePublish}>
           {update.is_published ? (
             <>
-              <EyeOff className="mr-2 size-4" /> Unpublish
+              <EyeOff className="mr-2 size-4" /> Hủy xuất bản
             </>
           ) : (
             <>
-              <Eye className="mr-2 size-4" /> Publish
+              <Eye className="mr-2 size-4" /> Xuất bản
             </>
           )}
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={onTogglePin}>
           {update.is_pinned ? (
             <>
-              <PinOff className="mr-2 size-4" /> Unpin
+              <PinOff className="mr-2 size-4" /> Bỏ ghim
             </>
           ) : (
             <>
-              <Pin className="mr-2 size-4" /> Pin
+              <Pin className="mr-2 size-4" /> Ghim
             </>
           )}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="text-destructive" onSelect={onDelete}>
-          <Trash2 className="mr-2 size-4" /> Delete
+          <Trash2 className="mr-2 size-4" /> Xóa
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -553,8 +553,8 @@ export default function LifeUpdatesManager() {
   return (
     <ManagerWrapper>
       <PageHeader
-        title="Life Updates"
-        description="Share what you're watching, doing, and thinking"
+        title="Cập nhật cuộc sống"
+        description="Chia sẻ những gì bạn đang xem, đang làm và đang suy nghĩ"
         actions={
           <div className="flex items-center gap-2 w-full sm:w-auto">
             {/* View toggle */}
@@ -564,7 +564,7 @@ export default function LifeUpdatesManager() {
                 size="icon"
                 className="h-7 w-7"
                 onClick={() => setViewMode("board")}
-                title="Board view"
+                title="Giao diện dạng bảng"
               >
                 <Grid3X3 className="size-3.5" />
               </Button>
@@ -573,19 +573,19 @@ export default function LifeUpdatesManager() {
                 size="icon"
                 className="h-7 w-7"
                 onClick={() => setViewMode("list")}
-                title="List view"
+                title="Giao diện dạng danh sách"
               >
                 <List className="size-3.5" />
               </Button>
             </div>
             <Button onClick={handleCreate} className="h-9 flex-1 sm:flex-none">
-              <Plus className="mr-2 size-4" /> New Update
+              <Plus className="mr-2 size-4" /> Cập nhật mới
             </Button>
           </div>
         }
         searchValue={searchTerm}
         onSearch={setSearchTerm}
-        searchPlaceholder="Search updates..."
+        searchPlaceholder="Tìm kiếm cập nhật..."
       />
 
       {/* Stats */}
@@ -595,7 +595,7 @@ export default function LifeUpdatesManager() {
         {/* Desktop sidebar */}
         <aside className="w-44 hidden md:block sticky top-20 shrink-0">
           <h4 className="font-semibold text-xs mb-2 px-2 text-muted-foreground uppercase tracking-wider">
-            Categories
+            Danh mục
           </h4>
           <div className="flex flex-col gap-0.5">
             <Button
@@ -608,7 +608,7 @@ export default function LifeUpdatesManager() {
               size="sm"
             >
               <Megaphone className="mr-2 size-3.5" />
-              All Updates
+              Tất cả
               <span className="ml-auto text-[10px] text-muted-foreground">
                 {updates.length}
               </span>
@@ -681,11 +681,11 @@ export default function LifeUpdatesManager() {
           {!isLoading && filteredUpdates.length === 0 ? (
             <div className="py-20 text-center text-muted-foreground border-2 border-dashed rounded-lg bg-muted/10">
               <Megaphone className="mx-auto size-12 opacity-20" />
-              <h3 className="mt-4 text-lg font-semibold">No Updates Found</h3>
+              <h3 className="mt-4 text-lg font-semibold">Không tìm thấy cập nhật nào</h3>
               <p className="mt-1 text-sm text-muted-foreground/80">
                 {searchTerm
-                  ? "Try a different search."
-                  : "Share your first life update!"}
+                  ? "Thử tìm kiếm với từ khóa khác."
+                  : "Chia sẻ nhật ký cập nhật cuộc sống đầu tiên của bạn!"}
               </p>
             </div>
           ) : viewMode === "board" ? (

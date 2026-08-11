@@ -56,7 +56,7 @@ export default function HabitGrid({
             <TableHeader className="bg-muted/30">
               <TableRow className="hover:bg-transparent border-b">
                 <TableHead className="w-[120px] sm:w-[160px] min-w-[120px] sm:min-w-[160px] pl-4 h-12 sticky left-0 bg-background/95 backdrop-blur z-20 border-r">
-                  Habit
+                  Thói quen
                 </TableHead>
                 {dates.map((date) => (
                   <TableHead
@@ -81,7 +81,7 @@ export default function HabitGrid({
                   </TableHead>
                 ))}
                 <TableHead className="text-center w-[60px] min-w-[60px] sticky right-0 bg-background/95 backdrop-blur z-20 border-l">
-                  Stats
+                  Thống kê
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -103,7 +103,7 @@ export default function HabitGrid({
                     colSpan={daysToShow + 2}
                     className="h-40 text-center text-muted-foreground"
                   >
-                    No habits found.
+                    Chưa có thói quen nào.
                   </TableCell>
                 </TableRow>
               )}

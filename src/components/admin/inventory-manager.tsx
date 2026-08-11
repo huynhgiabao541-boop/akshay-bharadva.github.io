@@ -70,18 +70,18 @@ import StatCard from "@/components/admin/shared/StatCard";
 // --- HELPERS ---
 
 const getWarrantyStatus = (expiryDate?: string | null) => {
-  if (!expiryDate) return { label: "No Warranty", color: "text-muted-foreground", bg: "bg-secondary", icon: X };
+  if (!expiryDate) return { label: "Không bảo hành", color: "text-muted-foreground", bg: "bg-secondary", icon: X };
   const expiry = parseLocalDate(expiryDate);
   const now = new Date();
   const warningZone = addMonths(now, 1);
 
   if (isAfter(now, expiry)) {
-    return { label: "Expired", color: "text-destructive", bg: "bg-destructive/10", icon: AlertCircle };
+    return { label: "Đã hết hạn", color: "text-destructive", bg: "bg-destructive/10", icon: AlertCircle };
   }
   if (isAfter(warningZone, expiry)) {
-    return { label: "Expiring Soon", color: "text-orange-500", bg: "bg-orange-500/10", icon: AlertCircle };
+    return { label: "Sắp hết hạn", color: "text-orange-500", bg: "bg-orange-500/10", icon: AlertCircle };
   }
-  return { label: "Active", color: "text-green-500", bg: "bg-green-500/10", icon: CheckCircle2 };
+  return { label: "Còn bảo hành", color: "text-green-500", bg: "bg-green-500/10", icon: CheckCircle2 };
 };
 
 export default function InventoryManager() {
@@ -129,16 +129,16 @@ export default function InventoryManager() {
 
   const handleDelete = async (id: string) => {
     const ok = await confirm({
-      title: "Delete Asset?",
-      description: "This will permanently remove this item from your inventory.",
+      title: "Xóa thiết bị?",
+      description: "Hành động này sẽ xóa vĩnh viễn thiết bị khỏi danh sách kho đồ của bạn.",
       variant: "destructive",
     });
     if (!ok) return;
     try {
       await deleteItem(id).unwrap();
-      toast.success("Item deleted");
+      toast.success("Đã xóa thiết bị");
     } catch (err) {
-      toast.error("Failed to delete item", { description: getErrorMessage(err) });
+      toast.error("Không thể xóa thiết bị", { description: getErrorMessage(err) });
     }
   };
 
@@ -158,11 +158,11 @@ export default function InventoryManager() {
   return (
     <ManagerWrapper>
       <PageHeader
-        title="Inventory"
-        description="Manage physical assets, licenses, and hardware."
+        title="Quản lý thiết bị & kho đồ"
+        description="Quản lý tài sản thể chất, phần cứng và bản quyền phần mềm."
         actions={
           <Button onClick={openCreate} size={isMobile ? "default" : "sm"}>
-            <Plus className="mr-2 size-4" /> Add Asset
+            <Plus className="mr-2 size-4" /> Thêm thiết bị mới
           </Button>
         }
       />
@@ -170,20 +170,20 @@ export default function InventoryManager() {
       {/* --- RESPONSIVE STATS GRID --- */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
         <StatCard
-          title="Net Value"
+          title="Giá trị ròng"
           value={`$${processedData.totalCurrentValue.toLocaleString()}`}
           icon={Receipt}
-          subValue={`Orig: $${processedData.totalOriginalValue.toLocaleString()}`}
+          subValue={`Gốc: $${processedData.totalOriginalValue.toLocaleString()}`}
         />
-        <StatCard title="Items" value={processedData.totalCount} icon={Box} />
+        <StatCard title="Tổng thiết bị" value={processedData.totalCount} icon={Box} />
         <StatCard
-          title="Depreciation"
+          title="Khấu hao"
           value={`-$${processedData.totalDepreciation.toLocaleString()}`}
           icon={TrendingDown}
-          subValue={`${((processedData.totalDepreciation / processedData.totalOriginalValue) * 100 || 0).toFixed(1)}% Loss`}
+          subValue={`Giảm ${((processedData.totalDepreciation / processedData.totalOriginalValue) * 100 || 0).toFixed(1)}%`}
           trend="down"
         />
-        <StatCard title="Categories" value={categories.length} icon={Filter} />
+        <StatCard title="Loại thiết bị" value={categories.length} icon={Filter} />
       </div>
 
       {/* --- RESPONSIVE TOOLBAR --- */}
@@ -192,7 +192,7 @@ export default function InventoryManager() {
           <div className="relative flex-1 sm:w-60 lg:w-72">
             <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
             <Input
-              placeholder="Search assets..."
+              placeholder="Tìm kiếm thiết bị..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="pl-9 bg-background h-9"
@@ -200,10 +200,10 @@ export default function InventoryManager() {
           </div>
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
             <SelectTrigger className="w-[140px] h-9">
-              <SelectValue placeholder="Category" />
+              <SelectValue placeholder="Loại thiết bị" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="all">Tất cả loại</SelectItem>
               {categories.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
             </SelectContent>
           </Select>
@@ -212,15 +212,15 @@ export default function InventoryManager() {
            <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm" className="gap-2 h-9 w-full sm:w-auto">
-                  <ArrowUpDown className="size-4" /> Sort
+                  <ArrowUpDown className="size-4" /> Sắp xếp
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Sort By</DropdownMenuLabel>
+                <DropdownMenuLabel>Sắp xếp theo</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => setSortBy("date")}>Purchase Date {sortBy === "date" && "✓"}</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setSortBy("value")}>Value (High-Low) {sortBy === "value" && "✓"}</DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setSortBy("name")}>Name (A-Z) {sortBy === "name" && "✓"}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setSortBy("date")}>Ngày mua {sortBy === "date" && "✓"}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setSortBy("value")}>Giá trị (Cao - Thấp) {sortBy === "value" && "✓"}</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setSortBy("name")}>Tên (A - Z) {sortBy === "name" && "✓"}</DropdownMenuItem>
               </DropdownMenuContent>
            </DropdownMenu>
            {/* Hide view toggle on mobile */}
@@ -240,7 +240,7 @@ export default function InventoryManager() {
         ) : processedData.filtered.length === 0 ? (
           <div className="text-center py-16 border-2 border-dashed rounded-xl bg-muted/20">
             <Box className="size-10 text-muted-foreground/30 mx-auto mb-3" />
-            <p className="text-muted-foreground">No assets found.</p>
+            <p className="text-muted-foreground">Không tìm thấy thiết bị nào.</p>
           </div>
         ) : (
           <>
@@ -249,10 +249,10 @@ export default function InventoryManager() {
                 <Table>
                   <TableHeader className="bg-muted/40">
                     <TableRow>
-                      <TableHead className="w-full sm:w-[40%]">Item Details</TableHead>
-                      <TableHead className="hidden md:table-cell">Category</TableHead>
-                      <TableHead className="hidden lg:table-cell">Warranty</TableHead>
-                      <TableHead className="hidden sm:table-cell text-right">Value</TableHead>
+                      <TableHead className="w-full sm:w-[40%]">Chi tiết thiết bị</TableHead>
+                      <TableHead className="hidden md:table-cell">Loại</TableHead>
+                      <TableHead className="hidden lg:table-cell">Bảo hành</TableHead>
+                      <TableHead className="hidden sm:table-cell text-right">Giá trị</TableHead>
                       <TableHead className="w-[50px]"></TableHead>
                     </TableRow>
                   </TableHeader>
@@ -282,7 +282,7 @@ export default function InventoryManager() {
                            <TableCell className="hidden md:table-cell"><Badge variant="outline" className="font-normal">{item.category}</Badge></TableCell>
                            <TableCell className="hidden lg:table-cell">
                               <div className={cn("flex items-center gap-1.5 text-xs font-medium", warranty.color)}><warranty.icon className="size-3.5" />{warranty.label}</div>
-                              {item.purchase_date && <div className="text-[10px] text-muted-foreground mt-0.5">Bought: {format(parseLocalDate(item.purchase_date), "MMM yyyy")}</div>}
+                              {item.purchase_date && <div className="text-[10px] text-muted-foreground mt-0.5">Ngày mua: {format(parseLocalDate(item.purchase_date), "MMM yyyy")}</div>}
                            </TableCell>
                            <TableCell className="hidden sm:table-cell text-right">
                               <div className="font-mono font-bold">${item.current_value?.toLocaleString() ?? item.purchase_price.toLocaleString()}</div>
@@ -292,8 +292,8 @@ export default function InventoryManager() {
                              <DropdownMenu>
                                <DropdownMenuTrigger asChild><Button variant="ghost" size="icon" className="h-8 w-8"><MoreHorizontal className="size-4" /></Button></DropdownMenuTrigger>
                                <DropdownMenuContent align="end">
-                                 <DropdownMenuItem onClick={() => openEdit(item)}><Edit2 className="mr-2 size-4" /> Edit</DropdownMenuItem>
-                                 <DropdownMenuItem className="text-destructive" onClick={() => handleDelete(item.id)}><Trash2 className="mr-2 size-4" /> Delete</DropdownMenuItem>
+                                 <DropdownMenuItem onClick={() => openEdit(item)}><Edit2 className="mr-2 size-4" /> Chỉnh sửa</DropdownMenuItem>
+                                 <DropdownMenuItem className="text-destructive" onClick={() => handleDelete(item.id)}><Trash2 className="mr-2 size-4" /> Xóa</DropdownMenuItem>
                                </DropdownMenuContent>
                              </DropdownMenu>
                            </TableCell>
@@ -319,8 +319,8 @@ export default function InventoryManager() {
                               <DropdownMenu>
                                  <DropdownMenuTrigger asChild><Button variant="ghost" size="icon" className="h-6 w-6 -mr-2 -mt-1"><MoreHorizontal className="size-4" /></Button></DropdownMenuTrigger>
                                  <DropdownMenuContent align="end">
-                                   <DropdownMenuItem onClick={() => openEdit(item)}>Edit</DropdownMenuItem>
-                                   <DropdownMenuItem className="text-destructive" onClick={() => handleDelete(item.id)}>Delete</DropdownMenuItem>
+                                   <DropdownMenuItem onClick={() => openEdit(item)}>Chỉnh sửa</DropdownMenuItem>
+                                   <DropdownMenuItem className="text-destructive" onClick={() => handleDelete(item.id)}>Xóa</DropdownMenuItem>
                                  </DropdownMenuContent>
                               </DropdownMenu>
                            </div>
@@ -330,10 +330,10 @@ export default function InventoryManager() {
                            </div>
                            <div className="flex items-end justify-between border-t pt-3 mt-auto">
                               <div>
-                                 <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Value</p>
+                                 <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Giá trị</p>
                                  <p className="font-mono text-lg font-bold">${item.current_value?.toLocaleString() ?? item.purchase_price.toLocaleString()}</p>
                               </div>
-                              {item.purchase_date && <div className="text-right"><p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Purchased</p><p className="text-xs">{format(parseLocalDate(item.purchase_date), "MMM yyyy")}</p></div>}
+                              {item.purchase_date && <div className="text-right"><p className="text-[10px] text-muted-foreground uppercase font-bold tracking-wider">Ngày mua</p><p className="text-xs">{format(parseLocalDate(item.purchase_date), "MMM yyyy")}</p></div>}
                            </div>
                         </CardContent>
                      </Card>
@@ -349,7 +349,7 @@ export default function InventoryManager() {
         <SheetContent className="sm:max-w-lg w-full flex flex-col">
           <div className="flex justify-between items-center mb-6">
             <SheetHeader>
-              <SheetTitle>{editingItem ? "Edit Asset" : "New Asset"}</SheetTitle>
+              <SheetTitle>{editingItem ? "Chỉnh sửa thiết bị" : "Thêm thiết bị mới"}</SheetTitle>
             </SheetHeader>
             <SheetClose asChild><Button type="button" variant="ghost" size="icon"><X className="size-4" /></Button></SheetClose>
           </div>

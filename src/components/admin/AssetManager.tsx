@@ -359,7 +359,7 @@ export default function AssetManager() {
   return (
     <ManagerWrapper className="h-full flex flex-col">
       <PageHeader
-        title="Asset Manager"
+        title="Quản lý tệp & tài sản"
         description={
           <AssetBreadcrumbs
             currentPath={currentPath}
@@ -378,7 +378,7 @@ export default function AssetManager() {
                 disabled={bulkSelectedIds.size === 0}
                 className="flex-1 sm:flex-none"
               >
-                <Move className="mr-2 size-4" /> Move ({bulkSelectedIds.size})
+                <Move className="mr-2 size-4" /> Di chuyển ({bulkSelectedIds.size})
               </Button>
               <Button
                 variant="destructive"
@@ -387,7 +387,7 @@ export default function AssetManager() {
                 disabled={bulkSelectedIds.size === 0}
                 className="flex-1 sm:flex-none"
               >
-                <Trash2 className="mr-2 size-4" /> Delete ({bulkSelectedIds.size}
+                <Trash2 className="mr-2 size-4" /> Xóa ({bulkSelectedIds.size}
                 )
               </Button>
               <Button
@@ -399,7 +399,7 @@ export default function AssetManager() {
                 }}
                 className="flex-1 sm:flex-none"
               >
-                <X className="mr-2 size-4" /> Cancel
+                <X className="mr-2 size-4" /> Hủy chọn
               </Button>
             </>
           ) : (
@@ -410,7 +410,7 @@ export default function AssetManager() {
                 onClick={() => setIsCreateFolderOpen(true)}
                 className="hidden sm:flex"
               >
-                <FolderPlus className="mr-2 size-4" /> New Folder
+                <FolderPlus className="mr-2 size-4" /> Thư mục mới
               </Button>
               <Button
                 variant="outline"
@@ -419,7 +419,7 @@ export default function AssetManager() {
                 disabled={isLoading}
                 className="hidden sm:flex"
               >
-                <RefreshCw className="mr-2 size-4" /> Rescan
+                <RefreshCw className="mr-2 size-4" /> Quét lại
               </Button>
               <Button
                 onClick={() => fileInputRef.current?.click()}
@@ -432,7 +432,7 @@ export default function AssetManager() {
                 ) : (
                   <Upload className="mr-2 size-4" />
                 )}{" "}
-                Upload
+                Tải tệp lên
               </Button>
             </>
           )}
@@ -475,7 +475,7 @@ export default function AssetManager() {
                 className="h-8 text-xs"
               >
                 <CheckSquare className="mr-2 size-3.5" />
-                {isMobile ? "Select" : "Select Files"}
+                {isMobile ? "Chọn" : "Chọn nhiều tệp"}
               </Button>
             </div>
 
@@ -504,7 +504,7 @@ export default function AssetManager() {
             <div className="absolute inset-0 z-50 bg-primary/10 border-2 border-dashed border-primary rounded-b-lg flex flex-col items-center justify-center backdrop-blur-sm">
               <Upload className="size-10 text-primary mb-2" />
               <p className="font-semibold text-primary">
-                Drop files to upload to current folder
+                Thả tệp vào đây để tải lên thư mục hiện tại
               </p>
             </div>
           )}
@@ -518,14 +518,14 @@ export default function AssetManager() {
               <div className="p-4 bg-muted/50 rounded-full mb-4">
                 <LayoutGrid className="size-8 opacity-20" />
               </div>
-              <h3 className="text-lg font-semibold">Empty Folder</h3>
-              <p className="text-sm mt-1">Upload files or create a subfolder.</p>
+              <h3 className="text-lg font-semibold">Thư mục trống</h3>
+              <p className="text-sm mt-1">Tải tệp lên hoặc tạo thêm thư mục con.</p>
               <Button
                 variant="outline"
                 className="mt-4"
                 onClick={() => setIsCreateFolderOpen(true)}
               >
-                <FolderPlus className="mr-2 size-4" /> Create Folder
+                <FolderPlus className="mr-2 size-4" /> Tạo thư mục
               </Button>
             </div>
           ) : (
@@ -534,7 +534,7 @@ export default function AssetManager() {
               {subFolders.length > 0 && (
                 <div className="mb-6">
                   <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">
-                    Folders
+                    Thư mục
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">
                     {subFolders.map((folder) => (
@@ -558,7 +558,7 @@ export default function AssetManager() {
                 <div>
                   {subFolders.length > 0 && (
                     <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">
-                      Files
+                      Tệp tin
                     </h3>
                   )}
 
@@ -612,7 +612,7 @@ export default function AssetManager() {
                                 e.stopPropagation();
                                 downloadAsset(asset);
                               }}
-                              title="Download"
+                              title="Tải về"
                             >
                               <Download className="size-3.5" />
                             </Button>
@@ -631,16 +631,16 @@ export default function AssetManager() {
                       <Table>
                         <TableHeader>
                           <TableRow>
-                            <TableHead className="w-[60px]">Preview</TableHead>
-                            <TableHead>Filename</TableHead>
+                            <TableHead className="w-[60px]">Xem trước</TableHead>
+                            <TableHead>Tên tệp</TableHead>
                             <TableHead className="hidden md:table-cell">
-                              Type
+                              Loại
                             </TableHead>
                             <TableHead className="hidden sm:table-cell">
-                              Size
+                              Dung lượng
                             </TableHead>
-                            <TableHead className="w-[50px]">Used</TableHead>
-                            <TableHead className="text-right">Actions</TableHead>
+                            <TableHead className="w-[50px]">Dùng ở</TableHead>
+                            <TableHead className="text-right">Hành động</TableHead>
                           </TableRow>
                         </TableHeader>
                         <TableBody>

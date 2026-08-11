@@ -143,18 +143,18 @@ export default function TaskManager() {
   return (
     <ManagerWrapper className="flex flex-col h-[calc(100vh-4rem)] md:h-auto">
       <PageHeader
-        title="Tasks"
-        description="Manage projects, track progress, and organize your workflow"
+        title="Công việc & Nhiệm vụ"
+        description="Quản lý dự án, theo dõi tiến độ và sắp xếp quy trình làm việc"
         searchValue={searchTerm}
         onSearch={setSearchTerm}
-        searchPlaceholder="Filter tasks..."
+        searchPlaceholder="Lọc nhiệm vụ..."
         actions={
           <Button
             onClick={() => handleCreateTask("todo")}
             size="sm"
             className="h-9 shadow-sm"
           >
-            <Plus className="mr-2 size-4" /> New Task
+            <Plus className="mr-2 size-4" /> Nhiệm vụ mới
           </Button>
         }
       />
@@ -199,10 +199,10 @@ export default function TaskManager() {
           <div className="flex justify-between items-center mb-6">
             <SheetHeader>
               <SheetTitle>
-                {editingTask?.id ? "Edit Task" : "Create Task"}
+                {editingTask?.id ? "Chỉnh sửa nhiệm vụ" : "Tạo nhiệm vụ mới"}
               </SheetTitle>
               <SheetDescription>
-                Manage task details and subtasks.
+                Quản lý chi tiết công việc và các nhiệm vụ con.
               </SheetDescription>
             </SheetHeader>
             <SheetClose asChild>
@@ -224,12 +224,12 @@ export default function TaskManager() {
       <Dialog open={isSubtaskDialogOpen} onOpenChange={setIsSubtaskDialogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>Add Subtask</DialogTitle>
-            <DialogDescription>Quickly add a sub-item.</DialogDescription>
+            <DialogTitle>Thêm nhiệm vụ con</DialogTitle>
+            <DialogDescription>Thêm nhanh một mục nhỏ vào nhiệm vụ này.</DialogDescription>
           </DialogHeader>
           <form onSubmit={handleCreateSubtask} className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label htmlFor="subtask-title">Title</Label>
+              <Label htmlFor="subtask-title">Tiêu đề</Label>
               <Input
                 id="subtask-title"
                 value={newSubtaskTitle}
@@ -240,10 +240,10 @@ export default function TaskManager() {
             <DialogFooter>
               <DialogClose asChild>
                 <Button type="button" variant="ghost">
-                  Cancel
+                  Hủy
                 </Button>
               </DialogClose>
-              <Button type="submit">Add</Button>
+              <Button type="submit">Thêm</Button>
             </DialogFooter>
           </form>
         </DialogContent>

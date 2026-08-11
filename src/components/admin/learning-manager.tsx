@@ -144,21 +144,21 @@ export default function LearningManager() {
   return (
     <ManagerWrapper>
       <PageHeader
-        title="Learning"
-        description="Track your personal curriculum and knowledge base"
+        title="Nhật ký & Tiến trình Học tập"
+        description="Theo dõi lộ trình học tập và kho tri thức cá nhân của bạn"
         actions={
           <Button onClick={() => setSheetState({ type: "create-subject" })}>
-            <Plus className="mr-2 size-4" /> New Module
+            <Plus className="mr-2 size-4" /> Học phần mới
           </Button>
         }
       />
 
       <div className="mt-6 space-y-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <StatCard title="Study Time" value={`${stats.totalHours} hrs`} icon={Clock} highlight />
-          <StatCard title="Modules" value={subjects.length} icon={Layers} />
-          <StatCard title="Topics" value={topics.length} icon={BookOpen} />
-          <StatCard title="Sessions" value={sessions.length} icon={Zap} />
+          <StatCard title="Thời gian học" value={`${stats.totalHours} giờ`} icon={Clock} highlight />
+          <StatCard title="Học phần" value={subjects.length} icon={Layers} />
+          <StatCard title="Chủ đề" value={topics.length} icon={BookOpen} />
+          <StatCard title="Buổi học" value={sessions.length} icon={Zap} />
         </div>
 
         <Collapsible open={isHeatmapOpen} onOpenChange={setIsHeatmapOpen}>
@@ -166,7 +166,7 @@ export default function LearningManager() {
             <CollapsibleTrigger asChild>
               <CardHeader className="cursor-pointer hover:bg-muted/50 transition-colors py-3">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-base">Consistency Log</CardTitle>
+                  <CardTitle className="text-base">Nhật ký tần suất học tập</CardTitle>
                   <ChevronDown className={cn("size-5 text-muted-foreground transition-transform", isHeatmapOpen && "rotate-180")} />
                 </div>
               </CardHeader>
@@ -182,13 +182,13 @@ export default function LearningManager() {
         </Collapsible>
         
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Modules</h3>
+          <h3 className="text-lg font-semibold">Danh sách học phần</h3>
           {subjects.length === 0 ? (
             <Card className="border-dashed">
               <CardContent className="py-12 text-center">
                 <Layers className="size-12 mx-auto text-muted-foreground/30 mb-4" />
-                <p className="text-lg font-semibold mb-1">No modules yet</p>
-                <Button onClick={() => setSheetState({ type: "create-subject" })}><Plus className="mr-2 size-4" /> Create First Module</Button>
+                <p className="text-lg font-semibold mb-1">Chưa có học phần nào</p>
+                <Button onClick={() => setSheetState({ type: "create-subject" })}><Plus className="mr-2 size-4" /> Tạo học phần đầu tiên</Button>
               </CardContent>
             </Card>
           ) : (
@@ -216,8 +216,8 @@ export default function LearningManager() {
         <SheetContent className="sm:max-w-lg">
           <div className="flex justify-between items-center mb-6">
             <SheetHeader>
-              <SheetTitle>{sheetState?.type?.includes("create") ? "Create" : "Edit"} {sheetState?.type?.includes("subject") ? "Module" : "Topic"}</SheetTitle>
-              <SheetDescription>Configure details.</SheetDescription>
+              <SheetTitle>{sheetState?.type?.includes("create") ? "Tạo" : "Chỉnh sửa"} {sheetState?.type?.includes("subject") ? "Học phần" : "Chủ đề"}</SheetTitle>
+              <SheetDescription>Cấu hình chi tiết thông tin.</SheetDescription>
             </SheetHeader>
             <SheetClose asChild><Button variant="ghost" size="icon"><X className="size-4" /></Button></SheetClose>
           </div>
