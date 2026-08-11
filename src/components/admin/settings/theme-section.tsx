@@ -50,14 +50,14 @@ export default function ThemeSection({ form }: ThemeSectionProps) {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Palette className="size-5 text-primary" /> Theme Settings
+          <Palette className="size-5 text-primary" /> Cài đặt Giao diện (Theme)
         </CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="presets" className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-4">
-            <TabsTrigger value="presets">Presets</TabsTrigger>
-            <TabsTrigger value="custom">Custom</TabsTrigger>
+            <TabsTrigger value="presets">Mẫu có sẵn</TabsTrigger>
+            <TabsTrigger value="custom">Tự điều chỉnh</TabsTrigger>
           </TabsList>
 
           <TabsContent value="presets" className="space-y-4">
@@ -66,11 +66,11 @@ export default function ThemeSection({ form }: ThemeSectionProps) {
               name="profile_data.default_theme"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Select Preset</FormLabel>
+                  <FormLabel>Chọn mẫu giao diện</FormLabel>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select a theme" />
+                        <SelectValue placeholder="Chọn một giao diện..." />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent className="max-h-64">
@@ -82,7 +82,7 @@ export default function ThemeSection({ form }: ThemeSectionProps) {
                     </SelectContent>
                   </Select>
                   <FormDescription>
-                    Uses a pre-defined color palette.
+                    Sử dụng bảng màu phối sẵn cho trang web.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -98,7 +98,7 @@ export default function ThemeSection({ form }: ThemeSectionProps) {
                   form.setValue("profile_data.default_theme", "theme-custom")
                 }
               >
-                Enable Custom Theme
+                Kích hoạt giao diện tùy chỉnh
               </Label>
               <Switch
                 checked={isCustomTheme}
@@ -156,9 +156,9 @@ export default function ThemeSection({ form }: ThemeSectionProps) {
                 ),
               }}
             >
-              <h4 className="font-bold text-sm mb-2">Preview</h4>
+              <h4 className="font-bold text-sm mb-2">Xem trước</h4>
               <p className="mb-3 text-xs opacity-80">
-                This is how your custom theme looks.
+                Đây là giao diện thực tế của màu sắc tùy chỉnh.
               </p>
               <button
                 type="button"
@@ -172,7 +172,7 @@ export default function ThemeSection({ form }: ThemeSectionProps) {
                   ),
                 }}
               >
-                Primary Button
+                Nút chính
               </button>
             </div>
           </TabsContent>
