@@ -153,9 +153,9 @@ export default function SecuritySettings() {
       className="mx-auto max-w-4xl space-y-8 pb-20 md:pb-0"
     >
       <div className="flex flex-col gap-2">
-        <h2 className="text-2xl font-bold">Security Settings</h2>
+        <h2 className="text-2xl font-bold">Cài đặt bảo mật</h2>
         <p className="text-muted-foreground text-sm">
-          Manage your account security and two-factor authentication.
+          Quản lý bảo mật tài khoản và xác thực hai yếu tố (2FA).
         </p>
       </div>
 
@@ -163,7 +163,7 @@ export default function SecuritySettings() {
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            {factorsError && typeof factorsError === "object" && "message" in factorsError ? String((factorsError as { message: unknown }).message) : "Failed to load MFA status"}
+            {factorsError && typeof factorsError === "object" && "message" in factorsError ? String((factorsError as { message: unknown }).message) : "Không thể tải trạng thái 2FA"}
           </AlertDescription>
         </Alert>
       )}
@@ -181,12 +181,12 @@ export default function SecuritySettings() {
               </div>
               <div>
                 <CardTitle className="text-lg">
-                  Two-Factor Authentication (2FA)
+                  Xác thực 2 yếu tố (2FA / MFA)
                 </CardTitle>
                 <CardDescription className="mt-1">
                   {mfaEnabled
-                    ? "Your account is secured with an additional layer of verification."
-                    : "Add an extra layer of security to your account."}
+                    ? "Tài khoản của bạn đã được bảo vệ với lớp xác thực bổ sung."
+                    : "Thêm một lớp bảo mật bổ sung để bảo vệ tài khoản."}
                 </CardDescription>
               </div>
             </div>
@@ -197,44 +197,44 @@ export default function SecuritySettings() {
                 mfaEnabled ? "bg-green-500/15 text-green-600" : "",
               )}
             >
-              {mfaEnabled ? "Enabled" : "Disabled"}
+              {mfaEnabled ? "Đã bật" : "Chưa bật"}
             </Badge>
           </div>
         </CardHeader>
         <CardContent>
           {!mfaEnabled && !isLoading && (
             <div className="text-center p-6 border bg-secondary/30 rounded-lg">
-              <h3 className="font-semibold">2FA is not active</h3>
+              <h3 className="font-semibold">2FA chưa được kích hoạt</h3>
               <p className="text-sm text-muted-foreground mt-1 mb-4">
-                Protect your account from unauthorized access.
+                Bảo vệ tài khoản của bạn khỏi truy cập trái phép.
               </p>
               <Button
                 onClick={() => router.push("/admin/setup-mfa")}
                 className="w-full sm:w-auto"
               >
-                <Smartphone className="mr-2 size-4" /> Enable 2FA Now
+                <Smartphone className="mr-2 size-4" /> Bật 2FA Ngay
               </Button>
             </div>
           )}
           {mfaEnabled && factors.length > 0 && (
             <>
               <h4 className="text-sm font-semibold mb-2">
-                Registered Authenticators
+                Thiết bị xác thực đã đăng ký
               </h4>
               <div className="rounded-md border overflow-hidden">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead className="text-right">Action</TableHead>
+                      <TableHead>Tên thiết bị</TableHead>
+                      <TableHead>Trạng thái</TableHead>
+                      <TableHead className="text-right">Hành động</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {factors.map((factor) => (
                       <TableRow key={factor.id}>
                         <TableCell className="font-medium">
-                          {factor.friendly_name || `Authenticator`}
+                          {factor.friendly_name || `Ứng dụng xác thực`}
                         </TableCell>
                         <TableCell>
                           <Badge
@@ -244,7 +244,7 @@ export default function SecuritySettings() {
                                 : "secondary"
                             }
                           >
-                            {factor.status}
+                            {factor.status === "verified" ? "Đã xác minh" : factor.status}
                           </Badge>
                         </TableCell>
                         <TableCell className="text-right">
@@ -254,7 +254,7 @@ export default function SecuritySettings() {
                             size="sm"
                             disabled={isLoading}
                           >
-                            Remove
+                            Xóa
                           </Button>
                         </TableCell>
                       </TableRow>
@@ -274,7 +274,7 @@ export default function SecuritySettings() {
               disabled={isLoading}
               className="w-full sm:w-auto"
             >
-              Add Another Method
+              Thêm phương thức mới
             </Button>
           </CardFooter>
         )}
@@ -283,17 +283,16 @@ export default function SecuritySettings() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <KeyRound className="size-5 text-primary" /> Change Password
+            <KeyRound className="size-5 text-primary" /> Đổi mật khẩu
           </CardTitle>
           <CardDescription>
-            Update your login password. You will be logged out from other
-            sessions.
+            Cập nhật mật khẩu đăng nhập. Bạn sẽ cần đăng nhập lại ở các phiên làm việc khác.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handlePasswordChange} className="space-y-4 max-w-md">
             <div>
-              <Label htmlFor="new-password">New Password</Label>
+              <Label htmlFor="new-password">Mật khẩu mới</Label>
               <Input
                 id="new-password"
                 type="password"
@@ -305,7 +304,7 @@ export default function SecuritySettings() {
               />
             </div>
             <div>
-              <Label htmlFor="confirm-password">Confirm New Password</Label>
+              <Label htmlFor="confirm-password">Xác nhận mật khẩu mới</Label>
               <Input
                 id="confirm-password"
                 type="password"
@@ -328,10 +327,10 @@ export default function SecuritySettings() {
             >
               {isUpdatingPassword ? (
                 <>
-                  <Loader2 className="mr-2 size-4 animate-spin" /> Updating...
+                  <Loader2 className="mr-2 size-4 animate-spin" /> Đang cập nhật...
                 </>
               ) : (
-                "Update Password"
+                "Cập nhật mật khẩu"
               )}
             </Button>
           </form>
@@ -345,9 +344,9 @@ export default function SecuritySettings() {
               <Siren className="h-8 w-8 text-red-500" />
             </div>
             <div>
-              <CardTitle className="text-red-500">Emergency Protocol</CardTitle>
+              <CardTitle className="text-red-500">Giao thức khẩn cấp</CardTitle>
               <CardDescription>
-                Control global access to your portfolio in case of emergency.
+                Kiểm soát quyền truy cập toàn trang web trong trường hợp khẩn cấp.
               </CardDescription>
             </div>
           </div>
@@ -369,9 +368,9 @@ export default function SecuritySettings() {
                 level === 0 ? "text-green-500" : "text-muted-foreground",
               )}
             />
-            <span className="font-bold">Level 0: Normal</span>
+            <span className="font-bold">Cấp 0: Bình thường</span>
             <span className="text-xs text-muted-foreground mt-1 text-center">
-              Public site is live.
+              Website hoạt động công khai.
             </span>
           </button>
 
@@ -391,9 +390,9 @@ export default function SecuritySettings() {
                 level === 1 ? "text-orange-500" : "text-muted-foreground",
               )}
             />
-            <span className="font-bold">Level 1: Maintenance</span>
+            <span className="font-bold">Cấp 1: Bảo trì</span>
             <span className="text-xs text-muted-foreground mt-1 text-center">
-              Public site hidden. Admin accessible.
+              Ẩn website. Chỉ Admin truy cập.
             </span>
           </button>
 
@@ -413,9 +412,9 @@ export default function SecuritySettings() {
                 level === 2 ? "text-red-600" : "text-muted-foreground",
               )}
             />
-            <span className="font-bold text-red-600">Level 2: Lockdown</span>
+            <span className="font-bold text-red-600">Cấp 2: Khóa khẩn cấp</span>
             <span className="text-xs text-muted-foreground mt-1 text-center">
-              API Read-Only. No edits allowed.
+              API chỉ đọc. Không cho phép chỉnh sửa.
             </span>
           </button>
         </CardContent>
@@ -423,15 +422,15 @@ export default function SecuritySettings() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">Security Best Practices</CardTitle>
+          <CardTitle className="text-lg">Khuyến nghị bảo mật</CardTitle>
         </CardHeader>
         <CardContent>
           <ul className="space-y-3 text-sm text-muted-foreground">
             {[
-              "Keep your authenticator app secure and backed up (e.g. Authy cloud backup).",
-              "Do not share your password or MFA codes with anyone.",
-              "Use a strong, unique password generated by a password manager.",
-              "Log out when you finish managing your site on shared devices.",
+              "Lưu giữ ứng dụng xác thực của bạn an toàn và có bản sao lưu.",
+              "Không chia sẻ mật khẩu hoặc mã MFA với bất kỳ ai.",
+              "Sử dụng mật khẩu mạnh, duy nhất từ trình quản lý mật khẩu.",
+              "Đăng xuất khi hoàn tất quản lý trang web trên thiết bị dùng chung.",
             ].map((tip) => (
               <li key={tip} className="flex items-start">
                 <CheckCircle className="mr-3 mt-0.5 size-4 shrink-0 text-primary" />

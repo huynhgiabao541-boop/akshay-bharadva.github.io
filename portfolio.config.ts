@@ -26,7 +26,7 @@ const portfolioConfig = {
   // ---------------------------------------------------------------------------
   // THEME
   // ---------------------------------------------------------------------------
-  defaultTheme: "theme-github-light",
+  defaultTheme: "theme-custom-blue",
   typographyPreset: "typo-default",
   portfolioMode: "multi-page" as const,
 

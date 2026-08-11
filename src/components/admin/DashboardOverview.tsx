@@ -104,25 +104,25 @@ export default function DashboardOverview({
     <div className="space-y-6 pb-20 md:pb-0">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
-          title="Total Blog Views"
+          title="Tổng lượt xem Blog"
           value={stats?.totalBlogViews.toLocaleString() || "0"}
           icon={Eye}
         />
         <StatCard
-          title="This Month's Net"
+          title="Thu nhập ròng tháng này"
           value={`$${stats?.monthlyNet.toFixed(2) || "0.00"}`}
           icon={Banknote}
         />
         <StatCard
-          title="Pending Tasks"
+          title="Công việc chờ xử lý"
           value={overdueTasks.length + tasksDueToday.length}
           icon={ListTodo}
         />
         <StatCard
-          title="Primary Goal"
+          title="Mục tiêu chính"
           value={`${goalProgress.toFixed(0)}%`}
           icon={Target}
-          subValue={primaryGoal?.name || "No goal set"}
+          subValue={primaryGoal?.name || "Chưa đặt mục tiêu"}
         />
       </div>
 
@@ -132,10 +132,10 @@ export default function DashboardOverview({
           <Card className="h-full flex flex-col">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Zap className="text-primary size-5" /> Action Center
+                <Zap className="text-primary size-5" /> Trung tâm xử lý
               </CardTitle>
               <CardDescription>
-                What needs your attention right now.
+                Những việc cần sự chú ý của bạn ngay lúc này.
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-grow">
@@ -144,9 +144,9 @@ export default function DashboardOverview({
               pinnedNotes.length === 0 ? (
                 <div className="flex flex-col h-full items-center justify-center text-center text-muted-foreground p-8 border-2 border-dashed rounded-lg bg-muted/10">
                   <CheckCircle className="mx-auto size-12 mb-4 text-green-500 opacity-80" />
-                  <p className="font-semibold">Inbox Zero</p>
+                  <p className="font-semibold">Hoàn thành tất cả</p>
                   <p className="text-sm">
-                    All clear! No immediate actions required.
+                    Mọi thứ đều ổn! Không có việc gì cần xử lý ngay.
                   </p>
                 </div>
               ) : (
@@ -163,7 +163,7 @@ export default function DashboardOverview({
                           {task.title}
                         </p>
                         <p className="text-[10px] uppercase font-bold text-destructive/80 mt-0.5">
-                          Overdue Task
+                          Quá hạn
                         </p>
                       </div>
                     </div>
@@ -180,7 +180,7 @@ export default function DashboardOverview({
                           {task.title}
                         </p>
                         <p className="text-[10px] uppercase font-bold text-muted-foreground mt-0.5">
-                          Due Today
+                          Hạn hôm nay
                         </p>
                       </div>
                     </div>
@@ -194,10 +194,10 @@ export default function DashboardOverview({
                       <Pin className="h-5 w-5 text-primary shrink-0" />
                       <div className="min-w-0">
                         <p className="font-semibold text-sm leading-tight truncate">
-                          {note.title || "Untitled Note"}
+                          {note.title || "Ghi chú không tiêu đề"}
                         </p>
                         <p className="text-[10px] uppercase font-bold text-muted-foreground mt-0.5">
-                          Pinned Note
+                          Ghi chú đã ghim
                         </p>
                       </div>
                     </div>
@@ -212,7 +212,7 @@ export default function DashboardOverview({
         <div className="lg:col-span-1 space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Recent Activity</CardTitle>
+              <CardTitle>Hoạt động gần đây</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               {recentPosts.length > 0 ? (
@@ -226,7 +226,7 @@ export default function DashboardOverview({
                         variant={post.published ? "default" : "secondary"}
                         className="h-5 px-1.5 text-[10px]"
                       >
-                        {post.published ? "Pub" : "Draft"}
+                        {post.published ? "Đã đăng" : "Bản nháp"}
                       </Badge>
                       <span className="font-medium truncate">{post.title}</span>
                     </div>
@@ -248,14 +248,14 @@ export default function DashboardOverview({
                 ))
               ) : (
                 <p className="text-center text-sm text-muted-foreground py-4">
-                  No recent blog posts.
+                  Chưa có bài viết mới.
                 </p>
               )}
             </CardContent>
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle>7-Day Expense Trend</CardTitle>
+              <CardTitle>Xu hướng thu chi 7 ngày</CardTitle>
             </CardHeader>
             <CardContent>
               <ChartContainer config={{}} className="h-40 w-full">
@@ -304,12 +304,12 @@ export default function DashboardOverview({
         <div className="lg:col-span-1 space-y-6">
           <Card className="h-full">
             <CardHeader>
-              <CardTitle>7-Day Outlook</CardTitle>
+              <CardTitle>Dự báo 7 ngày tới</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
                 <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-2">
-                  <CalendarClock className="size-3" /> Upcoming Tasks
+                  <CalendarClock className="size-3" /> Công việc sắp tới
                 </h4>
                 {tasksDueSoon.length > 0 ? (
                   <div className="space-y-2">
@@ -329,7 +329,7 @@ export default function DashboardOverview({
                   </div>
                 ) : (
                   <p className="text-xs text-muted-foreground italic pl-2">
-                    No tasks due in next 7 days.
+                    Không có công việc nào trong 7 ngày tới.
                   </p>
                 )}
               </div>
@@ -338,7 +338,7 @@ export default function DashboardOverview({
 
               <div>
                 <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-2">
-                  <Repeat className="size-3" /> Projected Finance
+                  <Repeat className="size-3" /> Dự báo tài chính
                 </h4>
                 {upcomingRecurring.length > 0 ? (
                   <div className="space-y-2">
@@ -375,7 +375,7 @@ export default function DashboardOverview({
                   </div>
                 ) : (
                   <p className="text-xs text-muted-foreground italic pl-2">
-                    No recurring payments scheduled.
+                    Không có giao dịch định kỳ nào sắp tới.
                   </p>
                 )}
               </div>

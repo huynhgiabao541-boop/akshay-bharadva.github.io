@@ -1470,6 +1470,75 @@ export const adminApi = createApi({
       },
       invalidatesTags: ["SiteSettings"],
     }),
+    purgeOldData: builder.mutation<
+      { deletedCount: number },
+      {
+        deleteDoneTasksOlderThanDays?: number;
+        deleteHabitLogsOlderThanDays?: number;
+        deleteLearningSessionsOlderThanDays?: number;
+        deleteTransactionsOlderThanDays?: number;
+        deleteUnpinnedNotes?: boolean;
+      }
+    >({
+      queryFn: async (options) => {
+        if (!supabase) return { data: { deletedCount: 0 } };
+        let totalDeleted = 0;
+        const now = new Date();
+
+        if (options.deleteDoneTasksOlderThanDays && options.deleteDoneTasksOlderThanDays > 0) {
+          const cutoff = subDays(now, options.deleteDoneTasksOlderThanDays).toISOString();
+          const { data } = await supabase
+            .from("tasks")
+            .delete()
+            .eq("status", "done")
+            .lt("created_at", cutoff)
+            .select("id");
+          if (data) totalDeleted += data.length;
+        }
+
+        if (options.deleteHabitLogsOlderThanDays && options.deleteHabitLogsOlderThanDays > 0) {
+          const cutoff = format(subDays(now, options.deleteHabitLogsOlderThanDays), "yyyy-MM-dd");
+          const { data } = await supabase
+            .from("habit_logs")
+            .delete()
+            .lt("date", cutoff)
+            .select("id");
+          if (data) totalDeleted += data.length;
+        }
+
+        if (options.deleteLearningSessionsOlderThanDays && options.deleteLearningSessionsOlderThanDays > 0) {
+          const cutoff = subDays(now, options.deleteLearningSessionsOlderThanDays).toISOString();
+          const { data } = await supabase
+            .from("learning_sessions")
+            .delete()
+            .lt("created_at", cutoff)
+            .select("id");
+          if (data) totalDeleted += data.length;
+        }
+
+        if (options.deleteTransactionsOlderThanDays && options.deleteTransactionsOlderThanDays > 0) {
+          const cutoff = format(subDays(now, options.deleteTransactionsOlderThanDays), "yyyy-MM-dd");
+          const { data } = await supabase
+            .from("transactions")
+            .delete()
+            .lt("date", cutoff)
+            .select("id");
+          if (data) totalDeleted += data.length;
+        }
+
+        if (options.deleteUnpinnedNotes) {
+          const { data } = await supabase
+            .from("notes")
+            .delete()
+            .eq("is_pinned", false)
+            .select("id");
+          if (data) totalDeleted += data.length;
+        }
+
+        return { data: { deletedCount: totalDeleted } };
+      },
+      invalidatesTags: ["Tasks", "Habits", "Learning", "Transactions", "Notes", "Dashboard"],
+    }),
   }),
 });
 
@@ -1549,4 +1618,5 @@ export const {
   useGetSecuritySettingsQuery,
   useUpdateLockdownLevelMutation,
   useMoveAssetMutation,
+  usePurgeOldDataMutation,
 } = adminApi;

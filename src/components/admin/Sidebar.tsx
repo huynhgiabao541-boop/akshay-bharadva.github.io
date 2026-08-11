@@ -22,6 +22,7 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   Megaphone,
+  Database,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -44,33 +45,34 @@ import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const mainNav = [
-  { name: "Dashboard", href: "/admin", icon: Home },
-  { name: "Calendar", href: "/admin/calendar", icon: CalendarIcon },
+  { name: "Bảng điều khiển", href: "/admin", icon: Home },
+  { name: "Lịch", href: "/admin/calendar", icon: CalendarIcon },
 ];
 
 const portfolioNav = [
-  { name: "Blog", href: "/admin/blog", icon: BookText },
-  { name: "Life Updates", href: "/admin/life-updates", icon: Megaphone },
-  { name: "Content", href: "/admin/content", icon: LayoutTemplate },
-  { name: "Assets", href: "/admin/assets", icon: ImageIcon },
+  { name: "Bài viết (Blog)", href: "/admin/blog", icon: BookText },
+  { name: "Cập nhật cuộc sống", href: "/admin/life-updates", icon: Megaphone },
+  { name: "Nội dung (CMS)", href: "/admin/content", icon: LayoutTemplate },
+  { name: "Tài sản & Tệp", href: "/admin/assets", icon: ImageIcon },
 ];
 
 const productivityNav = [
-  { name: "Tasks", href: "/admin/tasks", icon: ListTodo },
-  { name: "Notes", href: "/admin/notes", icon: StickyNote },
-  { name: "Learning", href: "/admin/learning", icon: BrainCircuit },
-  { name: "Habits", href: "/admin/habits", icon: CheckSquare },
+  { name: "Công việc", href: "/admin/tasks", icon: ListTodo },
+  { name: "Ghi chú", href: "/admin/notes", icon: StickyNote },
+  { name: "Học tập", href: "/admin/learning", icon: BrainCircuit },
+  { name: "Thói quen", href: "/admin/habits", icon: CheckSquare },
 ];
 const financialNav = [
-  { name: "Finance", href: "/admin/finance", icon: Banknote },
-  { name: "Inventory", href: "/admin/inventory", icon: Box },
+  { name: "Tài chính", href: "/admin/finance", icon: Banknote },
+  { name: "Kho & Kiểm kê", href: "/admin/inventory", icon: Box },
 ];
 
 const systemNav = [
-  { name: "Navigation", href: "/admin/navigation", icon: NavigationIcon },
-  { name: "Settings", href: "/admin/settings", icon: Settings },
-  { name: "Security", href: "/admin/security", icon: Lock },
-  { name: "CRUD Test", href: "/admin/test", icon: FlaskConical },
+  { name: "Điều hướng", href: "/admin/navigation", icon: NavigationIcon },
+  { name: "Cài đặt", href: "/admin/settings", icon: Settings },
+  { name: "Bảo mật", href: "/admin/security", icon: Lock },
+  { name: "Dọn dẹp hệ thống", href: "/admin/cleanup", icon: Database },
+  { name: "Kiểm tra CRUD", href: "/admin/test", icon: FlaskConical },
 ];
 
 interface SidebarProps {
@@ -167,7 +169,7 @@ export default function Sidebar({
             size="icon"
             onClick={toggleCollapse}
             className="hidden lg:flex shrink-0"
-            title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+            title={isCollapsed ? "Mở rộng thanh bên" : "Thu gọn thanh bên"}
           >
             {isCollapsed ? (
               <PanelLeftOpen className="h-5 w-5" />
@@ -197,7 +199,7 @@ export default function Sidebar({
                     <Search className="h-5 w-5" />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="right">Search (Cmd+K)</TooltipContent>
+                <TooltipContent side="right">Tìm kiếm (Cmd+K)</TooltipContent>
               </Tooltip>
             </TooltipProvider>
           ) : (
@@ -211,7 +213,7 @@ export default function Sidebar({
               }
             >
               <Search className="mr-2 h-4 w-4" />
-              <span className="hidden lg:inline-flex">Search...</span>
+              <span className="hidden lg:inline-flex">Tìm kiếm...</span>
               <kbd className="pointer-events-none absolute right-1.5 top-1.5 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
                 <span className="text-xs">⌘</span>K
               </kbd>
@@ -276,7 +278,7 @@ export default function Sidebar({
               >
                 <AccordionItem value="portfolio" className="border-b-0">
                   <AccordionTrigger className="py-2 text-xs font-mono uppercase text-muted-foreground hover:no-underline">
-                    Portfolio
+                    Hồ sơ (Portfolio)
                   </AccordionTrigger>
                   <AccordionContent className="pt-1">
                     <ul className="space-y-1 list-none">
@@ -290,7 +292,7 @@ export default function Sidebar({
                 </AccordionItem>
                 <AccordionItem value="productivity" className="border-b-0">
                   <AccordionTrigger className="py-2 text-xs font-mono uppercase text-muted-foreground hover:no-underline">
-                    Productivity
+                    Năng suất
                   </AccordionTrigger>
                   <AccordionContent className="pt-1">
                     <ul className="space-y-1 list-none">
@@ -304,7 +306,7 @@ export default function Sidebar({
                 </AccordionItem>
                 <AccordionItem value="financial" className="border-b-0">
                   <AccordionTrigger className="py-2 text-xs font-mono uppercase text-muted-foreground hover:no-underline">
-                    Financial
+                    Tài chính
                   </AccordionTrigger>
                   <AccordionContent className="pt-1">
                     <ul className="space-y-1 list-none">
@@ -318,7 +320,7 @@ export default function Sidebar({
                 </AccordionItem>
                 <AccordionItem value="system" className="border-b-0">
                   <AccordionTrigger className="py-2 text-xs font-mono uppercase text-muted-foreground hover:no-underline">
-                    System
+                    Hệ thống
                   </AccordionTrigger>
                   <AccordionContent className="pt-1">
                     <ul className="space-y-1 list-none">
@@ -362,7 +364,7 @@ export default function Sidebar({
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent side={isCollapsed ? "right" : "top"}>
-                      Logout
+                      Đăng xuất
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>

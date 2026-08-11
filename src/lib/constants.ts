@@ -273,6 +273,7 @@ export const TYPOGRAPHY_PRESETS = [
 export type TypographyPresetValue = (typeof TYPOGRAPHY_PRESETS)[number]["value"];
 
 export const THEME_PRESETS = [
+  { value: "theme-custom-blue", label: "Custom Ocean Blue" },
   { value: "theme-blueprint", label: "Blueprint" },
   { value: "theme-dracula", label: "Dracula" },
   { value: "theme-nord", label: "Nord" },

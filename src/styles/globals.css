@@ -170,6 +170,36 @@ nav, button, input, textarea, select {
     --chart-5: 340 75% 65%;
   }
 
+  /* --- Custom Ocean Blue --- */
+  .theme-custom-blue {
+    --background: 207 86% 96%;        /* Light tint #E3F2FD */
+    --foreground: 216 85% 15%;        /* Dark Blue #0D47A1 text */
+    --card: 0 0% 100%;
+    --card-foreground: 216 85% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 216 85% 15%;
+    --primary: 207 90% 54%;          /* Vivid Blue #2196F3 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 207 86% 94%;        /* Soft Blue #E3F2FD */
+    --secondary-foreground: 216 85% 34%; /* Dark Blue #0D47A1 */
+    --muted: 207 86% 94%;            /* Soft Blue #E3F2FD */
+    --muted-foreground: 216 35% 45%;
+    --accent: 207 90% 77%;           /* Sky Blue #90CAF9 */
+    --accent-foreground: 216 85% 15%;
+    --destructive: 0 73% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 207 90% 82%;           /* #90CAF9 border tint */
+    --input: 207 90% 82%;
+    --ring: 207 90% 54%;
+    --radius: 0.5rem;
+
+    --chart-1: 207 90% 54%;          /* #2196F3 */
+    --chart-2: 216 85% 34%;          /* #0D47A1 */
+    --chart-3: 207 90% 77%;          /* #90CAF9 */
+    --chart-4: 207 86% 94%;          /* #E3F2FD */
+    --chart-5: 200 80% 55%;
+  }
+
   .theme-github-light {
     --background: 0 0% 100%;
     --foreground: 212 12% 15%;

@@ -125,7 +125,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
   const { activeSession, elapsedTime } = useAppSelector(
     (state) => state.learningSession,
   );
-  
+
   const { data: learningData } = useGetLearningDataQuery(undefined, {
     skip: !isSupabaseConfigured,
   });
@@ -271,17 +271,17 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuLabel>Tài khoản của tôi</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
                   <Link href="/">
                     <ExternalLink className="mr-2 h-4 w-4" />
-                    Back to Portfolio
+                    Xem trang Portfolio
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleLogout}>
                   <LogOut className="mr-2 h-4 w-4" />
-                  <span>Logout</span>
+                  <span>Đăng xuất</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -301,20 +301,20 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
             size="icon"
           >
             <Plus className="h-6 w-6" />
-            <span className="sr-only">Quick Add</span>
+            <span className="sr-only">Thêm nhanh</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" side="top" className="mb-2 w-48">
-          <DropdownMenuLabel>Quick Add</DropdownMenuLabel>
+          <DropdownMenuLabel>Thêm Nhanh</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => router.push("/admin/tasks")}>
-            <ListTodo className="mr-2 h-4 w-4" /> New Task
+            <ListTodo className="mr-2 h-4 w-4" /> Nhiệm vụ mới
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => router.push("/admin/notes")}>
-            <StickyNote className="mr-2 h-4 w-4" /> New Note
+            <StickyNote className="mr-2 h-4 w-4" /> Ghi chú mới
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => router.push("/admin/finance")}>
-            <Banknote className="mr-2 h-4 w-4" /> New Transaction
+            <Banknote className="mr-2 h-4 w-4" /> Giao dịch mới
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

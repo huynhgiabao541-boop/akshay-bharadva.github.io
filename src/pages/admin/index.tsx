@@ -46,7 +46,7 @@ export default function AdminIndexPage() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button>
-                  <Plus className="mr-2 size-4" /> Quick Add
+                  <Plus className="mr-2 size-4" /> Thêm nhanh
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
