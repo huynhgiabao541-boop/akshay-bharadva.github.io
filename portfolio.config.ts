@@ -6,27 +6,27 @@ const portfolioConfig = {
   // ---------------------------------------------------------------------------
   // IDENTITY
   // ---------------------------------------------------------------------------
-  name: "Akshay Bharadva",
-  title: "AI Engineer & Full-Stack Developer",
+  name: "Văn Lang Illustrator",
+  title: "Illustration Student & Digital Artist | Van Lang University",
   description:
-    "I build fast, scalable web apps — from pixel-perfect UIs to bulletproof APIs.",
-  profilePicture: "https://github.com/akshay-bharadva.png",
+    "Chuyên minh họa sách, thiết kế nhân vật và nghệ thuật truyền thông số. Đam mê kể chuyện qua từng nét vẽ.",
+  profilePicture: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop",
   showProfilePicture: true,
 
   logo: {
-    main: "AKSHAY",
-    highlight: ".DEV",
+    main: "ART",
+    highlight: ".VLU",
   },
 
   bio: [
-    "I'm a full stack engineer with 6+ years of experience turning ideas into production-ready products. I've worked across early-stage startups and mid-size SaaS companies, owning features end-to-end — from database schema to deployed UI.",
-    "Outside of work, I contribute to open source, write about developer tooling on my blog, and occasionally mentor junior devs. When I'm not at a keyboard, I'm probably hiking or losing at chess.",
+    "Tôi là sinh viên ngành Thiết kế Minh họa tại Đại học Văn Lang (TP.HCM). Với niềm đam mê dành cho nghệ thuật kể chuyện thị giác, tôi tập trung vào minh họa sách, thiết kế nhân vật và nghệ thuật truyền thông số.",
+    "Bên cạnh các đồ án học tập tại trường, tôi thường xuyên ký họa đời sống hàng ngày, sáng tạo các dự án truyện tranh cá nhân và nhận các dự án vẽ minh họa tự do (freelance).",
   ],
 
   // ---------------------------------------------------------------------------
   // THEME
   // ---------------------------------------------------------------------------
-  defaultTheme: "theme-custom-blue",
+  defaultTheme: "theme-blueprint",
   typographyPreset: "typo-default",
   portfolioMode: "multi-page" as const,
 
@@ -36,16 +36,16 @@ const portfolioConfig = {
   statusPanel: {
     show: true,
     design: "minimal" as const,
-    title: "Current Status",
-    availability: "Open to new opportunities",
+    title: "Trạng thái nghệ thuật",
+    availability: "Nhận vẽ minh họa Freelance / Collab",
     currentlyExploring: {
-      title: "Learning",
-      items: ["Rust", "WebAssembly", "AI-assisted tooling"],
+      title: "Đang sáng tác / Học",
+      items: ["Màu nước Digital", "Thiết kế sách ảnh", "Concept Art"],
     },
     latestProject: {
-      name: "Taskflow — AI Task Manager",
-      linkText: "View on GitHub",
-      href: "https://github.com/vercel/next.js",
+      name: "Đồ án Minh họa Sách - Văn Lang",
+      linkText: "Xem tác phẩm",
+      href: "/projects",
     },
   },
 
@@ -53,10 +53,9 @@ const portfolioConfig = {
   // SOCIAL LINKS
   // ---------------------------------------------------------------------------
   socialLinks: [
-    { id: "github", label: "GitHub", url: "https://github.com/akshay-bharadva" },
-    { id: "linkedin", label: "LinkedIn", url: "https://linkedin.com/in/akshay-bharadva" },
-    { id: "email", label: "Email", url: "mailto:john@foliokit.dev" },
-    { id: "twitter", label: "Twitter", url: "https://twitter.com/akshay-bharadva" },
+    { id: "github", label: "Behance", url: "https://behance.net" },
+    { id: "linkedin", label: "Instagram", url: "https://instagram.com" },
+    { id: "email", label: "Email Liên hệ", url: "mailto:illustrator@vlu.edu.vn" },
   ],
 
   // ---------------------------------------------------------------------------

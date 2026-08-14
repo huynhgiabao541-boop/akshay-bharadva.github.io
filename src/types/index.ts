@@ -289,6 +289,9 @@ export interface SiteContent {
   profile_data: {
     name: string;
     title: string;
+    hero_badge_text?: string;
+    hero_badge_icon?: string;
+    hero_badge_status_color?: string;
     description: string;
     profile_picture_url: string;
     show_profile_picture: boolean;
@@ -335,6 +338,13 @@ export interface SiteContent {
       show_contact_form: boolean;
       show_availability_badge: boolean;
       show_services: boolean;
+    };
+    cta_banner?: {
+      show: boolean;
+      title: string;
+      description: string;
+      primary_button_label: string;
+      secondary_button_label: string;
     };
     updates_layout?: "timeline" | "scrapbook";
     typography_preset?: string;

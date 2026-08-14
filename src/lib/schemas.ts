@@ -276,7 +276,11 @@ export type ContactFormValues = z.infer<typeof contactFormSchema>;
 export const socialLinkSchema = z.object({
   id: z.string(),
   label: z.string(),
-  url: z.string().url("Must be a valid URL").or(z.literal("")),
+  url: z
+    .string()
+    .optional()
+    .nullable()
+    .transform((val) => val || ""),
   is_visible: z.boolean(),
 });
 
@@ -287,6 +291,9 @@ export const siteSettingsSchema = z.object({
   profile_data: z.object({
     name: z.string().min(1, "Name is required"),
     title: z.string().min(1, "Title is required"),
+    hero_badge_text: z.string().optional().default("System Online"),
+    hero_badge_icon: z.string().optional().default("terminal"),
+    hero_badge_status_color: z.string().optional().default("green"),
     default_theme: z.string(),
     custom_theme_colors: z
       .object({
@@ -344,6 +351,19 @@ export const siteSettingsSchema = z.object({
       show_availability_badge: z.boolean().default(true),
       show_services: z.boolean().default(true),
     }),
+    cta_banner: z.object({
+      show: z.boolean().default(true),
+      title: z.string().min(1, "CTA title is required"),
+      description: z.string().min(1, "CTA description is required"),
+      primary_button_label: z.string().min(1, "Primary button label is required"),
+      secondary_button_label: z.string().min(1, "Secondary button label is required"),
+    }).default({
+      show: true,
+      title: "Have a project in mind?",
+      description: "I'm always open to discussing new projects, creative ideas, or opportunities to be part of an amazing team. Let's build something great together.",
+      primary_button_label: "Get In Touch",
+      secondary_button_label: "More Ways to Connect",
+    }),
     updates_layout: z.enum(["timeline", "scrapbook"]).default("scrapbook"),
     typography_preset: z.string().default("typo-default"),
   }),
@@ -361,6 +381,9 @@ export const siteSettingsDefaultValues: SiteSettingsFormValues = {
   profile_data: {
     name: "",
     title: "",
+    hero_badge_text: "System Online",
+    hero_badge_icon: "terminal",
+    hero_badge_status_color: "green",
     description: "",
     profile_picture_url: "",
     default_theme: "theme-blueprint",
@@ -398,10 +421,23 @@ export const siteSettingsDefaultValues: SiteSettingsFormValues = {
       show_availability_badge: true,
       show_services: true,
     },
+    cta_banner: {
+      show: true,
+      title: "Have a project in mind?",
+      description: "I'm always open to discussing new projects, creative ideas, or opportunities to be part of an amazing team. Let's build something great together.",
+      primary_button_label: "Get In Touch",
+      secondary_button_label: "More Ways to Connect",
+    },
     updates_layout: "scrapbook",
     typography_preset: "typo-default",
   },
   social_links: [
+    { id: "facebook", label: "Facebook", url: "", is_visible: false },
+    { id: "instagram", label: "Instagram", url: "", is_visible: false },
+    { id: "telegram", label: "Telegram", url: "", is_visible: false },
+    { id: "twitter", label: "X (Twitter)", url: "", is_visible: false },
+    { id: "behance", label: "Behance", url: "", is_visible: false },
+    { id: "artstation", label: "ArtStation", url: "", is_visible: false },
     { id: "github", label: "GitHub", url: "", is_visible: true },
     { id: "linkedin", label: "LinkedIn", url: "", is_visible: true },
     { id: "email", label: "Email", url: "", is_visible: true },

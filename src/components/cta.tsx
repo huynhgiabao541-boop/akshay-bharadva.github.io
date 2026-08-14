@@ -6,6 +6,20 @@ import { useGetSiteIdentityQuery } from "@/store/api/publicApi";
 
 export default function Cta() {
   const { data: content } = useGetSiteIdentityQuery();
+
+  const ctaSettings = content?.profile_data.cta_banner;
+  const showCta = ctaSettings?.show ?? true;
+
+  if (!showCta) return null;
+
+  const title = ctaSettings?.title || "Have a project in mind?";
+  const description =
+    ctaSettings?.description ||
+    "I'm always open to discussing new projects, creative ideas, or opportunities to be part of an amazing team. Let's build something great together.";
+  const primaryLabel = ctaSettings?.primary_button_label || "Get In Touch";
+  const secondaryLabel =
+    ctaSettings?.secondary_button_label || "More Ways to Connect";
+
   const emailLink =
     content?.social_links.find((s) => s.id === "email")?.url ||
     "mailto:example@example.com";
@@ -25,12 +39,10 @@ export default function Cta() {
 
         <div className="relative z-10">
           <h2 className="text-3xl font-black text-foreground md:text-5xl tracking-tight">
-            Have a project in <span className="text-primary font-bold">mind?</span>
+            {title}
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">
-            I'm always open to discussing new projects, creative ideas, or
-            opportunities to be part of an amazing team. Let's build something
-            great together.
+            {description}
           </p>
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Button
@@ -39,7 +51,7 @@ export default function Cta() {
               className="bg-primary text-primary-foreground shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all px-8"
             >
               <a href={emailLink}>
-                Get In Touch <Mail className="ml-2 size-4" />
+                {primaryLabel} <Mail className="ml-2 size-4" />
               </a>
             </Button>
             <Button
@@ -49,7 +61,7 @@ export default function Cta() {
               className="border-border bg-card hover:bg-primary/5 hover:border-primary/30 hover:text-primary transition-all px-8"
             >
               <Link href="/contact">
-                More Ways to Connect <ArrowRight className="ml-2 size-4" />
+                {secondaryLabel} <ArrowRight className="ml-2 size-4" />
               </Link>
             </Button>
           </div>

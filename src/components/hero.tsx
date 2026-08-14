@@ -7,6 +7,11 @@ import {
   Clock,
   Activity,
   Zap,
+  Sparkles,
+  Palette,
+  Paintbrush,
+  Flame,
+  CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -185,6 +190,44 @@ export default function Hero() {
     },
   };
 
+  const getBadgeIcon = (iconName?: string) => {
+    switch (iconName) {
+      case "sparkles":
+        return <Sparkles className="size-4" />;
+      case "palette":
+        return <Palette className="size-4" />;
+      case "brush":
+        return <Paintbrush className="size-4" />;
+      case "flame":
+        return <Flame className="size-4 text-amber-500" />;
+      case "check":
+        return <CheckCircle2 className="size-4 text-green-500" />;
+      case "none":
+        return null;
+      case "terminal":
+      default:
+        return <Terminal className="size-4" />;
+    }
+  };
+
+  const getDotColorClass = (colorName?: string) => {
+    switch (colorName) {
+      case "blue":
+        return "bg-blue-500";
+      case "purple":
+        return "bg-purple-500";
+      case "amber":
+        return "bg-amber-500";
+      case "none":
+        return null;
+      case "green":
+      default:
+        return "bg-primary";
+    }
+  };
+
+  const dotColor = getDotColorClass(hero.hero_badge_status_color);
+
   return (
     <section className="py-10 md:py-14 relative">
       {/* Decorative blur orbs */}
@@ -206,17 +249,31 @@ export default function Hero() {
               : "lg:col-span-12 text-center items-center",
           )}
         >
-          <motion.div
-            variants={itemVariants}
-            className="flex items-center gap-2 text-primary font-mono text-sm tracking-widest uppercase"
-          >
-            <Terminal className="size-4" />
-            <span>System Online</span>
-            <span className="relative flex h-2 w-2 ml-1">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
-            </span>
-          </motion.div>
+          {hero.hero_badge_text?.trim() && (
+            <motion.div
+              variants={itemVariants}
+              className="flex items-center gap-2 text-primary font-mono text-sm tracking-widest uppercase"
+            >
+              {getBadgeIcon(hero.hero_badge_icon)}
+              <span>{hero.hero_badge_text}</span>
+              {dotColor && (
+                <span className="relative flex h-2 w-2 ml-1">
+                  <span
+                    className={cn(
+                      "animate-ping absolute inline-flex h-full w-full rounded-full opacity-75",
+                      dotColor,
+                    )}
+                  />
+                  <span
+                    className={cn(
+                      "relative inline-flex rounded-full h-2 w-2",
+                      dotColor,
+                    )}
+                  />
+                </span>
+              )}
+            </motion.div>
+          )}
 
           <motion.h1
             variants={itemVariants}
@@ -260,44 +317,46 @@ export default function Hero() {
             <ReactMarkdown>{hero.description}</ReactMarkdown>
           </motion.div>
 
-          <motion.div
-            variants={itemVariants}
-            className={cn(
-              "flex flex-wrap gap-4 pt-4",
-              !status_panel.show && "justify-center",
-            )}
-          >
-            {socials
-              .filter((s) => s.is_visible)
-              .map((social, index) => {
-                const Icon = SOCIAL_ICONS[social.id.toLowerCase()];
-                if (!Icon) return null;
-                const isPrimary = index === 0;
-                return (
-                  <Button
-                    key={social.url}
-                    asChild
-                    variant={isPrimary ? "default" : "outline"}
-                    size="lg"
-                    className={cn(
-                      "gap-2 transition-all duration-300",
-                      isPrimary
-                        ? "bg-primary text-primary-foreground shadow-sm hover:shadow-md hover:-translate-y-0.5"
-                        : "border-border bg-card hover:bg-primary/5 hover:text-primary hover:border-primary/30",
-                    )}
-                  >
-                    <a
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+          {socials.some((s) => s.is_visible && s.url?.trim()) && (
+            <motion.div
+              variants={itemVariants}
+              className={cn(
+                "flex flex-wrap gap-4 pt-4",
+                !status_panel.show && "justify-center",
+              )}
+            >
+              {socials
+                .filter((s) => s.is_visible && s.url?.trim())
+                .map((social, index) => {
+                  const Icon = SOCIAL_ICONS[social.id.toLowerCase()];
+                  if (!Icon) return null;
+                  const isPrimary = index === 0;
+                  return (
+                    <Button
+                      key={social.id || social.url}
+                      asChild
+                      variant={isPrimary ? "default" : "outline"}
+                      size="lg"
+                      className={cn(
+                        "gap-2 transition-all duration-300",
+                        isPrimary
+                          ? "bg-primary text-primary-foreground shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                          : "border-border bg-card hover:bg-primary/5 hover:text-primary hover:border-primary/30",
+                      )}
                     >
-                      <Icon className="size-4" />
-                      {social.label}
-                    </a>
-                  </Button>
-                );
-              })}
-          </motion.div>
+                      <a
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Icon className="size-4" />
+                        {social.label}
+                      </a>
+                    </Button>
+                  );
+                })}
+            </motion.div>
+          )}
         </div>
 
         {/* Right: status panel — renders variant chosen in admin settings */}

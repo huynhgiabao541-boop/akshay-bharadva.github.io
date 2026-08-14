@@ -27,5 +27,8 @@ export type { FooterSectionProps } from "./footer-section";
 export { default as ContactPageSection } from "./contact-page-section";
 export type { ContactPageSectionProps } from "./contact-page-section";
 
+export { default as CtaSection } from "./cta-section";
+export type { CtaSectionProps } from "./cta-section";
+
 export { default as TypographySection } from "./typography-section";
 export type { TypographySectionProps } from "./typography-section";

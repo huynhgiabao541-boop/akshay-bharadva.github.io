@@ -30,6 +30,7 @@ import {
   LayoutSection,
   FooterSection,
   ContactPageSection,
+  CtaSection,
   TypographySection,
 } from "./settings";
 
@@ -118,6 +119,10 @@ export default function SiteSettingsManager() {
           ...siteSettingsDefaultValues.profile_data.contact_page,
           ...(cleanIdentity.profile_data.contact_page || {}),
         },
+        cta_banner: {
+          ...siteSettingsDefaultValues.profile_data.cta_banner,
+          ...(cleanIdentity.profile_data.cta_banner || {}),
+        },
         bio: cleanIdentity.profile_data.bio?.length
           ? cleanIdentity.profile_data.bio
           : [""],
@@ -181,6 +186,7 @@ export default function SiteSettingsManager() {
           <div className="lg:col-span-1 space-y-6">
             <LayoutSection form={form} />
             <StatusPanelSection form={form} />
+            <CtaSection form={form} />
             <GitHubSection form={form} />
             <ContactPageSection form={form} />
             <FooterSection form={form} />
