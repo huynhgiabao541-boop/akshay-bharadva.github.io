@@ -142,10 +142,24 @@ export default function StatusPanelSection({ form }: StatusPanelSectionProps) {
         />
         <FormField
           control={form.control}
+          name="profile_data.status_panel.latestProject.linkText"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Chữ hiển thị trên Nút bấm dự án (Link Text)</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="Xem tác phẩm" />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="profile_data.status_panel.latestProject.href"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Latest Project URL</FormLabel>
+              <FormLabel>Đường dẫn dự án (URL Path)</FormLabel>
               <FormControl>
                 <Input {...field} placeholder="/projects" />
               </FormControl>

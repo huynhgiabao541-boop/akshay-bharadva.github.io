@@ -48,7 +48,20 @@ export default function TypographySection({ form }: TypographySectionProps) {
                       <button
                         type="button"
                         key={preset.value}
-                        onClick={() => field.onChange(preset.value)}
+                        onClick={() => {
+                          field.onChange(preset.value);
+                          if (typeof window !== "undefined") {
+                            const html = document.documentElement;
+                            const TYPO_CLASSES = [
+                              "typo-default", "typo-editorial", "typo-modern-tech", "typo-elegant",
+                              "typo-bold-quirky", "typo-futuristic", "typo-classic-pro", "typo-geometric"
+                            ];
+                            html.classList.remove(...TYPO_CLASSES);
+                            if (preset.value !== "typo-default") {
+                              html.classList.add(preset.value);
+                            }
+                          }
+                        }}
                         className={cn(
                           "relative text-left rounded-lg border-2 p-3.5 transition-all group",
                           isActive

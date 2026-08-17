@@ -67,7 +67,28 @@ export default function ThemeSection({ form }: ThemeSectionProps) {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Chọn mẫu giao diện</FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
+                  <Select
+                    onValueChange={(val) => {
+                      field.onChange(val);
+                      // Realtime preview theme class change on document
+                      if (typeof window !== "undefined") {
+                        const html = document.documentElement;
+                        const VALID_THEMES = [
+                          "theme-blueprint", "theme-dracula", "theme-nord", "theme-tokyo-night",
+                          "theme-catppuccin-mocha", "theme-github-dark", "theme-onedark-pro",
+                          "theme-rose-pine", "theme-monokai", "theme-ayu-dark", "theme-solarized-light",
+                          "theme-catppuccin-latte", "theme-github-light", "theme-arctic", "theme-paper",
+                          "theme-cyberpunk", "theme-ocean", "theme-matrix", "theme-hc-dark", "theme-hc-light",
+                          "theme-neobrutalism-light", "theme-neobrutalism-dark", "theme-neobrutalism-punk",
+                          "theme-glass-dark", "theme-glass-frost", "theme-glass-aurora", "theme-glass-ocean",
+                          "theme-synthwave", "theme-retrowave", "theme-terminal", "theme-custom"
+                        ];
+                        html.classList.remove(...VALID_THEMES);
+                        html.classList.add(val);
+                      }
+                    }}
+                    value={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Chọn một giao diện..." />

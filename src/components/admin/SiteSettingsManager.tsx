@@ -153,6 +153,49 @@ export default function SiteSettingsManager() {
     }
   };
 
+  const onInvalid = (errors: any) => {
+    console.error("Form validation errors:", errors);
+
+    const getFieldNames = (obj: any, prefix = ""): string[] => {
+      let fields: string[] = [];
+      for (const key in obj) {
+        if (!obj[key]) continue;
+        const currentPath = prefix ? `${prefix}.${key}` : key;
+        if (obj[key].message) {
+          // Map technical field path to friendly Vietnamese names
+          let friendlyName = currentPath;
+          if (currentPath.includes("profile_data.name")) friendlyName = "Tên nghệ sĩ";
+          else if (currentPath.includes("profile_data.title")) friendlyName = "Tiêu đề Hero";
+          else if (currentPath.includes("profile_data.description")) friendlyName = "Mô tả ngắn Hero";
+          else if (currentPath.includes("profile_data.logo.main")) friendlyName = "Logo chữ chính (ART)";
+          else if (currentPath.includes("profile_data.logo.highlight")) friendlyName = "Logo chữ phụ (.VLU)";
+          else if (currentPath.includes("profile_data.bio")) friendlyName = "Bài giới thiệu Bio";
+          else if (currentPath.includes("status_panel.availability")) friendlyName = "Trạng thái nhận vẽ";
+          else if (currentPath.includes("status_panel.latestProject.name")) friendlyName = "Tên dự án mới nhất";
+          else if (currentPath.includes("status_panel.latestProject.linkText")) friendlyName = "Chữ hiển thị trên Nút bấm dự án (ví dụ: Xem tác phẩm)";
+          else if (currentPath.includes("status_panel.latestProject.href")) friendlyName = "Đường dẫn dự án";
+          else if (currentPath.includes("github_projects_config.username")) friendlyName = "Tên tài khoản GitHub";
+          else if (currentPath.includes("cta_banner.title")) friendlyName = "Tiêu đề Banner Kêu gọi";
+          else if (currentPath.includes("cta_banner.description")) friendlyName = "Mô tả Banner Kêu gọi";
+          else if (currentPath.includes("footer_data.copyright_text")) friendlyName = "Bản quyền Chân trang (Footer)";
+          fields.push(friendlyName);
+        } else if (typeof obj[key] === "object") {
+          fields = fields.concat(getFieldNames(obj[key], currentPath));
+        }
+      }
+      return fields;
+    };
+
+    const invalidFields = Array.from(new Set(getFieldNames(errors)));
+    const errorDetail = invalidFields.length > 0
+      ? `Các ô cần bổ sung: ${invalidFields.join(", ")}.`
+      : "Vui lòng kiểm tra lại các trường bắt buộc đang bị thiếu.";
+
+    toast.error("Không thể lưu cài đặt!", {
+      description: errorDetail,
+    });
+  };
+
   const isDirty = form.formState.isDirty;
 
   if (isLoadingSettings) return <SettingsSkeleton />;
@@ -166,7 +209,7 @@ export default function SiteSettingsManager() {
         description="Quản lý giao diện, thông tin nghệ sĩ và cấu hình tổng thể theo từng nhóm tính năng chuyên biệt."
         actions={
           <Button
-            onClick={form.handleSubmit(onSubmit)}
+            onClick={form.handleSubmit(onSubmit, onInvalid)}
             disabled={isSubmitting}
             className="w-full sm:w-auto shadow-md"
           >
@@ -363,7 +406,7 @@ export default function SiteSettingsManager() {
                 </Button>
                 <Button
                   size="sm"
-                  onClick={form.handleSubmit(onSubmit)}
+                  onClick={form.handleSubmit(onSubmit, onInvalid)}
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
