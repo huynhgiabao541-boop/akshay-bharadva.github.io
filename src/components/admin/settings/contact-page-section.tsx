@@ -14,7 +14,9 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
-import { MessageSquare } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { MessageSquare, ExternalLink } from "lucide-react";
 import type { SiteSettingsFormValues } from "@/lib/schemas";
 
 export interface ContactPageSectionProps {
@@ -24,11 +26,30 @@ export interface ContactPageSectionProps {
 export default function ContactPageSection({ form }: ContactPageSectionProps) {
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <MessageSquare className="size-5 text-primary" /> Contact Page
-        </CardTitle>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+        <div>
+          <CardTitle className="flex items-center gap-2 text-lg">
+            <MessageSquare className="size-5 text-primary" /> Trang Liên hệ (Contact Page Settings)
+          </CardTitle>
+          <div className="flex items-center gap-2 mt-1.5">
+            <Badge variant="outline" className="bg-purple-500/10 text-purple-500 border-purple-500/30 text-[10px]">
+              Xuất hiện ở: Trang /contact
+            </Badge>
+          </div>
+        </div>
+
+        <Button
+          variant="outline"
+          size="sm"
+          type="button"
+          onClick={() => window.open("/contact", "_blank")}
+          className="text-xs gap-1.5 border-border hover:bg-secondary"
+        >
+          <span>Xem trên website</span>
+          <ExternalLink className="w-3.5 h-3.5" />
+        </Button>
       </CardHeader>
+
       <CardContent className="space-y-4">
         <FormField
           control={form.control}
@@ -36,9 +57,9 @@ export default function ContactPageSection({ form }: ContactPageSectionProps) {
           render={({ field }) => (
             <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm bg-secondary/10">
               <div className="space-y-0.5">
-                <FormLabel>Contact Form</FormLabel>
-                <FormDescription>
-                  Show the message form on the contact page.
+                <FormLabel className="text-sm">Khung Form gửi tin nhắn Liên hệ</FormLabel>
+                <FormDescription className="text-xs">
+                  Hiển thị form gửi tin nhắn và brief công việc cho khách hàng.
                 </FormDescription>
               </div>
               <FormControl>
@@ -56,9 +77,9 @@ export default function ContactPageSection({ form }: ContactPageSectionProps) {
           render={({ field }) => (
             <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm bg-secondary/10">
               <div className="space-y-0.5">
-                <FormLabel>Availability Badge</FormLabel>
-                <FormDescription>
-                  Show the &quot;Available for work&quot; status indicator.
+                <FormLabel className="text-sm">Badge Trạng thái Nhận việc (Available)</FormLabel>
+                <FormDescription className="text-xs">
+                  Hiển thị chỉ báo "Available for Freelance / Work".
                 </FormDescription>
               </div>
               <FormControl>
@@ -76,9 +97,9 @@ export default function ContactPageSection({ form }: ContactPageSectionProps) {
           render={({ field }) => (
             <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm bg-secondary/10">
               <div className="space-y-0.5">
-                <FormLabel>Services Section</FormLabel>
-                <FormDescription>
-                  Show services below the contact info.
+                <FormLabel className="text-sm">Khối Dịch vụ Minh họa (Services)</FormLabel>
+                <FormDescription className="text-xs">
+                  Hiển thị các dịch vụ chính ở phần dưới trang liên hệ.
                 </FormDescription>
               </div>
               <FormControl>
