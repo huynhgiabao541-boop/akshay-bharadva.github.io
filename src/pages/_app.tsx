@@ -18,6 +18,7 @@ import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { Toaster as ShadcnToaster } from "@/components/ui/toaster";
 import { ConfirmDialogProvider } from "@/components/providers/ConfirmDialogProvider";
 import GlobalCommandPalette from "@/components/GlobalCommandPalette";
+import ArtProtectionProvider from "@/components/ui/ArtProtectionProvider";
 
 const tahuFont = localFont({
   src: "./fonts/Tahu.woff2",
@@ -211,7 +212,9 @@ export default function App(props: AppProps) {
         themes={VALID_THEMES}
       >
         <ConfirmDialogProvider>
-          <ThemedApp {...props} />
+          <ArtProtectionProvider>
+            <ThemedApp {...props} />
+          </ArtProtectionProvider>
         </ConfirmDialogProvider>
       </ThemeProvider>
     </Provider>

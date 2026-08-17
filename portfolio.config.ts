@@ -95,6 +95,7 @@ const portfolioConfig = {
     { label: "Showcase", href: "/showcase" },
     { label: "About", href: "/about" },
     { label: "Projects", href: "/projects" },
+    { label: "Commission", href: "/commission" },
     { label: "Blog", href: "/blog" },
     { label: "Updates", href: "/updates" },
     { label: "Contact", href: "/contact" },
