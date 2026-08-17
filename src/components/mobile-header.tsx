@@ -38,9 +38,11 @@ export default function MobileHeader() {
             <Skeleton className="h-6 w-32" />
           ) : (
             <>
-              {content.profile_data.logo.main}
-              <span className="text-primary font-bold">
-                {content.profile_data.logo.highlight}
+              <span className="text-foreground">
+                {content?.profile_data?.logo?.main || "ART"}
+              </span>
+              <span className="text-primary font-black">
+                {content?.profile_data?.logo?.highlight || ".VLU"}
               </span>
             </>
           )}

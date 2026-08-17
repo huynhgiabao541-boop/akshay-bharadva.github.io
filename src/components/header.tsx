@@ -45,10 +45,10 @@ export default function Header() {
             ) : (
               <>
                 <span className="text-foreground">
-                  {content.profile_data.logo.main}
+                  {content?.profile_data?.logo?.main || "ART"}
                 </span>
                 <span className="text-primary font-bold font-black">
-                  {content.profile_data.logo.highlight}
+                  {content?.profile_data?.logo?.highlight || ".VLU"}
                 </span>
               </>
             )}
